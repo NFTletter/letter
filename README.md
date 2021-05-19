@@ -2,64 +2,71 @@
 
 ## Introduction
 
-**Letter** is an [ERC-721 Smart Contract](https://eips.ethereum.org/EIPS/eip-721) that allows for the creation of **text-based NFTs**, meant for **written artistic expression**.
+**Letter** is an [ERC-1155 Smart Contract](https://eips.ethereum.org/EIPS/eip-1155) that allows for the creation of **text-based NFTs**, meant for **written artistic expression**.
 
 
 **Letter** allows for art pieces such as **poems**, **novels**, **manifestos** and **source code** to be minted as Non-Fungible Tokens into the [Ethereum](https://ethereum.org/en/) blockchain.
 
 
-Each Non-Fungible Token represents a **Page** with the following fields:
+Each Non-Fungible Token represents a Page, encoded as a `.json` file to be pinned on [IPFS](https://ipfs.io/):
 
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-head">Field<br></th>
-    <th class="tg-head">Description</th>
-    <th class="tg-head">Encoding</th>
-    <th class="tg-head">Optional?</th>
+    <th class="tg-roi2">Field<br></th>
+    <th class="tg-roi2">Description</th>
+    <th class="tg-roi2">Encoding</th>
+    <th class="tg-roi2">Optional?</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="tg-body">Id</td>
-    <td class="tg-body">Page Id</td>
-    <td class="tg-body">HEX</td>
-    <td class="tg-body">no</td>
+    <td class="tg-9wq8">Id</td>
+    <td class="tg-9wq8">Page/Token Id</td>
+    <td class="tg-9wq8"><span style="font-style:italic">uint256</span></td>
+    <td class="tg-9wq8">no</td>
   </tr>
   <tr>
-    <td class="tg-body">Nonce</td>
-    <td class="tg-body">Page counter</td>
-    <td class="tg-body">HEX</td>
-    <td class="tg-body">no</td>
+    <td class="tg-9wq8">Nonce</td>
+    <td class="tg-9wq8">Page number</td>
+    <td class="tg-9wq8"><span style="font-style:italic">uint256</span></td>
+    <td class="tg-9wq8">no</td>
   </tr>
   <tr>
-    <td class="tg-body">Title</td>
-    <td class="tg-body">Title of the Page</td>
-    <td class="tg-body">Unicode</td>
-    <td class="tg-body">yes</td>
+    <td class="tg-nrix">Cover</td>
+    <td class="tg-nrix">Page cover</td>
+    <td class="tg-nrix"><span style="font-style:italic">ipfs://cid</span> for <span style="font-style:italic">.png</span> or <span style="font-style:italic">.svg</span></td>
+    <td class="tg-nrix">yes</td>
   </tr>
   <tr>
-    <td class="tg-body">Body</td>
-    <td class="tg-body">Actual contents of the Page</td>
-    <td class="tg-body">Unicode</td>
-    <td class="tg-body">no</td>
+    <td class="tg-9wq8">Title</td>
+    <td class="tg-9wq8">Title of the Page</td>
+    <td class="tg-9wq8"><span style="font-style:italic">ipfs://cid</span> for <span style="font-style:italic">.txt</span> (UTF-8)</td>
+    <td class="tg-9wq8">yes</td>
   </tr>
   <tr>
-    <td class="tg-body">Rubric</td>
-    <td class="tg-body">Author signature</td>
-    <td class="tg-body">Unicode</td>
-    <td class="tg-body">yes</td>
+    <td class="tg-9wq8">Body</td>
+    <td class="tg-9wq8">Actual contents of the Page</td>
+    <td class="tg-9wq8"><span style="font-style:italic">ipfs://cid</span> for <span style="font-style:italic">.txt</span> (UTF-8)</td>
+    <td class="tg-9wq8">no</td>
   </tr>
   <tr>
-    <td class="tg-body">Parent</td>
-    <td class="tg-body">Id of parent Page</td>
-    <td class="tg-body">HEX</td>
-    <td class="tg-body">yes</td>
+    <td class="tg-0lax">Rubric</td>
+    <td class="tg-baqh">Author signature</td>
+    <td class="tg-0lax"><span style="font-style:italic">ipfs://cid </span>for <span style="font-style:italic">.txt</span> (UTF-8)</td>
+    <td class="tg-baqh">yes</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">Parent</td>
+    <td class="tg-9wq8">Id of parent Page/Token</td>
+    <td class="tg-9wq8"><span style="font-style:italic">uint256</span></td>
+    <td class="tg-9wq8">yes</td>
   </tr>
 </tbody>
 </table>
 
-[Unicode](https://home.unicode.org/) allows for the widest possible range of digital text-based expression.
+NFT Pages are minted, burned and traded against the LETT token.
+.json, .txt, .png and .svg files are pinned to IPFS over [Pinata](https://pinata.cloud/). 
 
 ## Instructions
 
