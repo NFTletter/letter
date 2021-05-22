@@ -33,12 +33,6 @@ Each Non-Fungible Token represents a Page, encoded as a `.json` file to be pinne
     <td class="tg-9wq8">no</td>
   </tr>
   <tr>
-    <td class="tg-nrix">Cover</td>
-    <td class="tg-nrix">Page cover</td>
-    <td class="tg-nrix"><span style="font-style:italic">ipfs://cid</span> for <span style="font-style:italic">.png</span> or <span style="font-style:italic">.svg</span></td>
-    <td class="tg-nrix">yes</td>
-  </tr>
-  <tr>
     <td class="tg-9wq8">Title</td>
     <td class="tg-9wq8">Title of the Page</td>
     <td class="tg-9wq8"><span style="font-style:italic">ipfs://cid</span> for <span style="font-style:italic">.txt</span> (UTF-8)</td>
