@@ -2,13 +2,13 @@
 
 ## Introduction
 
-**Letter** is an [ERC-1155 Smart Contract](https://eips.ethereum.org/EIPS/eip-1155) that allows for the creation of **text-based NFTs**, meant for **written artistic expression**.
+**Letter** is an [ERC-721 Smart Contract](https://eips.ethereum.org/EIPS/eip-721) that allows for the creation of **text-based NFTs**, meant for **written artistic expression**.
 
 
 **Letter** allows for art pieces such as **poems**, **novels**, **manifestos** and **source code** to be minted as Non-Fungible Tokens into the [Ethereum](https://ethereum.org/en/) blockchain.
 
 
-Each Non-Fungible Token represents a Page, encoded as a `.json` file to be pinned on [IPFS](https://ipfs.io/):
+Each Non-Fungible Token represents a Page. The NFT metadata is encoded as a `.json` file to be pinned on [IPFS](https://ipfs.io/):
 
 <table class="tg">
 <thead>
@@ -59,9 +59,6 @@ Each Non-Fungible Token represents a Page, encoded as a `.json` file to be pinne
 </tbody>
 </table>
 
-NFT Pages are minted, burned and traded against the LETT token.
-.json, .txt, .png and .svg files are pinned to IPFS over [Pinata](https://pinata.cloud/). 
-
 ## Instructions
 
 1. Open a Truffle console with a local development private network:
@@ -97,8 +94,10 @@ truffle(develop)> await nft.mint("0xaddr...")
 
 ## Roadmap
 
-- [ ] Solidity source.
-- [ ] IPFS storage.
+- [ ] Solidity Source Code (OpenZeppelin ERC-721).
+- [ ] Metadata API for IPFS storage.
+- [ ] Minter Front-End.
+- [ ] Display Front-End.
 - [ ] Testnet deployment.
 - [ ] Mint Testnet Hello World Token.
 - [ ] OpenSea Hello World Token validation.
@@ -110,3 +109,4 @@ truffle(develop)> await nft.mint("0xaddr...")
  - [OpenZeppelin Forum Post: Create an NFT and deploy to a public testnet, using Truffle](https://forum.openzeppelin.com/t/create-an-nft-and-deploy-to-a-public-testnet-using-truffle/2961)
  - [OpenSea ERC-721 Tutorial](https://docs.opensea.io/docs/1-structuring-your-smart-contract)
  - [OpenZeppelin ERC-721PresetMinterPauserAutoId ERC721 Preset](https://docs.openzeppelin.com/contracts/3.x/api/presets#ERC721PresetMinterPauserAutoId)
+ - [How to Build ERC-721 NFTs with IPFS](https://medium.com/pinata/how-to-build-erc-721-nfts-with-ipfs-e76a21d8f914)
