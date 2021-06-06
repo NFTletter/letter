@@ -98,6 +98,7 @@ truffle(develop)> await nft.mint("0xaddr...")
 - [ ] Metadata API for IPFS storage.
 - [ ] Minter Front-End.
 - [ ] Display Front-End.
+- [ ] Mocha + Chai tests.
 - [ ] Testnet deployment.
 - [ ] Mint Testnet Hello World Token.
 - [ ] OpenSea Hello World Token validation.
