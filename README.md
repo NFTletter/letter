@@ -2,7 +2,7 @@
 
 ## Introduction
 
-**Letter** is an [ERC-721 Smart Contract](https://eips.ethereum.org/EIPS/eip-721) that allows for the creation of **text-based NFTs**, meant for **written artistic expression**.
+**Letter** is an [ERC-721 Smart Contract](http://erc721.org/) that allows for the creation of **text-based NFTs**, meant for **written artistic expression**.
 
 
 **Letter** allows for art pieces such as **poems**, **novels**, **manifestos** and **source code** to be minted as Non-Fungible Tokens into the [Ethereum](https://ethereum.org/en/) blockchain.
