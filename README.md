@@ -8,7 +8,7 @@
 **Letter** allows for art pieces such as **poems**, **novels**, **manifestos** and **source code** to be minted as Non-Fungible Tokens into the [Ethereum](https://ethereum.org/en/) blockchain.
 
 
-Each Non-Fungible Token represents a Page. The NFT metadata is encoded as a `.json` file to be pinned on [IPFS](https://ipfs.io/):
+Each Non-Fungible Token represents a **Page**. Each Page has the following fields:
 
 <table class="tg">
 <thead>
@@ -21,33 +21,21 @@ Each Non-Fungible Token represents a Page. The NFT metadata is encoded as a `.js
 </thead>
 <tbody>
   <tr>
-    <td class="tg-9wq8">Id</td>
-    <td class="tg-9wq8">Page/Token Id</td>
-    <td class="tg-9wq8"><span style="font-style:italic">uint256</span></td>
-    <td class="tg-9wq8">no</td>
-  </tr>
-  <tr>
-    <td class="tg-9wq8">Nonce</td>
-    <td class="tg-9wq8">Page number</td>
-    <td class="tg-9wq8"><span style="font-style:italic">uint256</span></td>
-    <td class="tg-9wq8">no</td>
-  </tr>
-  <tr>
     <td class="tg-9wq8">Title</td>
     <td class="tg-9wq8">Title of the Page</td>
-    <td class="tg-9wq8"><span style="font-style:italic">ipfs://cid</span> for <span style="font-style:italic">.txt</span> (UTF-8)</td>
+    <td class="tg-9wq8"><span style="font-style:italic">string (UTF-8)</td>
     <td class="tg-9wq8">yes</td>
   </tr>
   <tr>
     <td class="tg-9wq8">Body</td>
     <td class="tg-9wq8">Actual contents of the Page</td>
-    <td class="tg-9wq8"><span style="font-style:italic">ipfs://cid</span> for <span style="font-style:italic">.txt</span> (UTF-8)</td>
+    <td class="tg-9wq8"><span style="font-style:italic">string (UTF-8)</td>
     <td class="tg-9wq8">no</td>
   </tr>
   <tr>
     <td class="tg-0lax">Rubric</td>
     <td class="tg-baqh">Author signature</td>
-    <td class="tg-0lax"><span style="font-style:italic">ipfs://cid </span>for <span style="font-style:italic">.txt</span> (UTF-8)</td>
+    <td class="tg-0lax">string (UTF-8)</td>
     <td class="tg-baqh">yes</td>
   </tr>
   <tr>
@@ -59,48 +47,16 @@ Each Non-Fungible Token represents a Page. The NFT metadata is encoded as a `.js
 </tbody>
 </table>
 
-## Instructions
-
-1. Open a Truffle console with a local development private network:
-```
-$ npx truffle develop
-...
-```
-
-2. Deploy Letter to the local privatenet:
-```
-truffle(develop)> migrate
-...
-```
-
-3. Load Letter:
-```
-truffle(develop)> nft = await ERC721PresetMinterPauserAutoId.deployed()
-undefined
-```
-
-4. Interact with Letter:
-```
-truffle(develop)> await nft.name()
-'letter'
-truffle(develop)> await nft.symbol()
-'LETT'
-```
-
-5. Mint Pages:
-```
-truffle(develop)> await nft.mint("0xaddr...")
-```
+The NFT metadata representing each Page is encoded as a `.json` UTF-8 file to be pinned on [IPFS](https://ipfs.io/).
 
 ## Roadmap
 
 - [ ] Solidity Source Code (OpenZeppelin ERC-721).
-- [ ] Metadata API for IPFS storage.
 - [ ] Minter Front-End.
 - [ ] Display Front-End.
 - [ ] Mocha + Chai tests.
 - [ ] Testnet deployment.
-- [ ] Mint Testnet Hello World Token.
+- [ ] Make Contract upgradable.
 - [ ] OpenSea Hello World Token validation.
 - [ ] [Prepare for Mainnet](https://docs.openzeppelin.com/learn/preparing-for-mainnet).
 - [ ] Mainnet deployment.
