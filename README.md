@@ -54,9 +54,11 @@ The NFT metadata representing each Page is encoded as a `.json` UTF-8 file to be
 - [ ] Solidity Source Code (OpenZeppelin ERC-721).
 - [ ] Minter Front-End.
 - [ ] Display Front-End.
-- [ ] Mocha + Chai tests.
+- [ ] Brownie tests.
 - [ ] Testnet deployment.
+- [ ] Natspec documentation.
 - [ ] Make Contract upgradable.
+- [ ] Automated Auditing.
 - [ ] OpenSea Hello World Token validation.
 - [ ] [Prepare for Mainnet](https://docs.openzeppelin.com/learn/preparing-for-mainnet).
 - [ ] Mainnet deployment.
