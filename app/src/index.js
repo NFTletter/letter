@@ -44,6 +44,9 @@ const App = {
     const rubric = document.getElementById("rubric").value;
     const parent = document.getElementById("parent").value;
 
+    // ToDo: check parent tokenId exists
+    // ToDo: check body is not empty
+
     const pageJSON = {
       "title": title,
       "body": body,
@@ -66,6 +69,7 @@ const App = {
     const ipfsCID = result.IpfsHash;
     console.log(result);
 
+    // ToDo: fix newTokenId
     const newTokenId = await createPage(ipfsCID).send({from: this.account});
     console.log(newTokenId);
     const status = "Page Token Id: " + newTokenId + "<br> IPFS CID: " + ipfsCID;
