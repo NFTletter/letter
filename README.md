@@ -87,14 +87,13 @@ $ npm run dev
 ## Roadmap
 
 - [ ] Solidity Source Code (OpenZeppelin ERC-721).
-- [ ] Minter Front-End.
-- [ ] Display Front-End.
+- [ ] Minter Front+Back End.
+- [ ] Display Front+Back End.
 - [ ] Brownie tests.
 - [ ] Testnet deployment.
-- [ ] Natspec documentation.
 - [ ] Make Contract upgradable.
 - [ ] Automated Auditing.
-- [ ] OpenSea Hello World Token validation.
+- [ ] Natspec documentation.
 - [ ] [Prepare for Mainnet](https://docs.openzeppelin.com/learn/preparing-for-mainnet).
 - [ ] Mainnet deployment.
 
