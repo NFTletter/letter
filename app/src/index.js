@@ -44,6 +44,7 @@ const App = {
     const author = document.getElementById("author").value;
     const parent = document.getElementById("parent").value;
 
+    // ToDo: check parent tokenId is number
     // ToDo: check parent tokenId exists
     // ToDo: check body is not empty
 
