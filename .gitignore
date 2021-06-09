@@ -118,3 +118,6 @@ dist
 # remix
 contracts/artifacts
 .deps
+
+# pinata
+app/pinataConfig.json

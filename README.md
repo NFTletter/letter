@@ -59,7 +59,15 @@ $ git clone https://github.com/NFTletter/letter.git
 $ cd letter
 ```
 
-2. Set the proper [Pinata](https://pinata.cloud) keys at `app/pinataConfig.json`. Make sure the API keys have access to the `pinJSONToIPFS` feature.
+2. Set the proper [Pinata](https://pinata.cloud) keys at `app/pinataConfig.json`. Make sure the API keys have access to the `pinJSONToIPFS` feature. For example:
+```
+$ cat << EOF > app/pinataConfig.json
+{
+  "APIKey": "89baeb2d3427f4b0a882",
+  "SecretKey": "2f01fc70bf03dca7729c324070e00b146924825baf2cd105cb7f6a36e59a5d60"
+}
+EOF
+```
 
 3. Start Truffle and load the Smart Contract:
 ```
