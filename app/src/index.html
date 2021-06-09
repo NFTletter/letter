@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MetaCoin | Truffle Webpack Demo w/ Frontend</title>
+    <title>NFT Letter</title>
   </head>
   <style>
     input {
@@ -10,28 +10,34 @@
     }
   </style>
   <body>
-    <h1>MetaCoin — Example Truffle Dapp</h1>
-    <p>You have <strong class="balance">loading...</strong> META</p>
+    <center>
+       <h1 style="font-size:7vw">📜✍️</h1>
+    </center>
 
-    <h1>Send MetaCoin</h1>
+    <center>
+      <label for="title">Title: (optional)</label>
+      <input type="text" id="title" size="50" placeholder="e.g. hello world" />
 
-    <label for="amount">Amount:</label>
-    <input type="text" id="amount" placeholder="e.g. 95" />
+      <label for="body">Body:</label>
+      <br>
+      <textarea id="body" rows="4" cols="60" placeholder="e.g. roses are red, violets are blue.">
+      </textarea>
+      <br><br>
 
-    <label for="receiver">To address:</label>
-    <input
-      type="text"
-      id="receiver"
-      placeholder="e.g. 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"
-    />
+      <label for="rubric">Rubric: (optional)</label>
+      <input type="text" id="rubric" size="50" placeholder="e.g. shakespeare" />
 
-    <button onclick="App.sendCoin()">Send MetaCoin</button>
+      <label for="parent">Parent Page Token Id: (optional)</label>
+      <input type="text" id="parent" size="50" placeholder="e.g. 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae" />
 
-    <p id="status"></p>
-    <p>
-      <strong>Hint:</strong> open the browser developer console to view any
-      errors and warnings.
-    </p>
+      <button onclick="App.createPage()">Mint Page</button>
+      <br>
+      <br>
+
+      <span id="status"></span>
+    </center>
+
+    <br>
     <script src="index.js"></script>
   </body>
 </html>
