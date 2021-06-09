@@ -49,6 +49,33 @@ Each Non-Fungible Token represents a **Page**. Each Page has the following field
 
 The NFT metadata representing each Page is encoded as a `.json` UTF-8 file to be pinned on [IPFS](https://ipfs.io/).
 
+## Instructions
+
+Instructions for deployment of a [Truffle](https://www.trufflesuite.com/)-based development environment.
+
+1. Clone:
+```
+$ git clone https://github.com/NFTletter/letter.git
+$ cd letter
+```
+
+2. Set the proper [Pinata](https://pinata.cloud) keys at `app/pinataConfig.json`. Make sure the API keys have access to the `pinJSONToIPFS` feature.
+
+3. Start Truffle and load the Smart Contract:
+```
+$ truffle develop
+...
+truffle(develop)> migrate
+```
+
+4. On a new terminal, then start the DApp:
+```
+$ cd letter/app
+$ npm install --save
+$ npm audit fix
+$ npm run dev
+```
+
 ## Roadmap
 
 - [ ] Solidity Source Code (OpenZeppelin ERC-721).
