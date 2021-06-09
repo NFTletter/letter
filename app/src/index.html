@@ -9,26 +9,25 @@
       margin-bottom: 12px;
     }
   </style>
-  <body>
+  <body onload="about()" style="font-family:helvetica;background-color:#EAEAEA;">
     <center>
        <h1 style="font-size:7vw">📜✍️</h1>
     </center>
 
     <center>
-      <label for="title">Title: (optional)</label>
-      <input type="text" id="title" size="50" placeholder="e.g. hello world" />
+      <label for="title">Page Title: (optional)</label>
+      <input type="text" id="title" size="50" placeholder="e.g.: 𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡" />
 
-      <label for="body">Body:</label>
+      <label for="body">Page Body:</label>
       <br>
-      <textarea id="body" rows="4" cols="60" placeholder="e.g. roses are red, violets are blue.">
-      </textarea>
+      <textarea id="body" rows="4" cols="60" placeholder="e.g.: 𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡, 𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢."></textarea>
       <br><br>
 
-      <label for="rubric">Rubric: (optional)</label>
-      <input type="text" id="rubric" size="50" placeholder="e.g. shakespeare" />
+      <label for="author">Page Author: (optional)</label>
+      <input type="text" id="author" size="50" placeholder="e.g.: 𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮" />
 
       <label for="parent">Parent Page Token Id: (optional)</label>
-      <input type="text" id="parent" size="50" placeholder="e.g. 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae" />
+      <input type="text" id="parent" size="50" placeholder="e.g.: 1337" />
 
       <button onclick="App.createPage()">Mint Page</button>
       <br>

@@ -41,7 +41,7 @@ const App = {
     const { createPage } = this.meta.methods;
     const title = document.getElementById("title").value;
     const body = document.getElementById("body").value;
-    const rubric = document.getElementById("rubric").value;
+    const author = document.getElementById("author").value;
     const parent = document.getElementById("parent").value;
 
     // ToDo: check parent tokenId exists
@@ -50,7 +50,7 @@ const App = {
     const pageJSON = {
       "title": title,
       "body": body,
-      "rubric": rubric,
+      "author": author,
       "parent": parent,
     }
 
