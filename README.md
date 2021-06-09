@@ -21,25 +21,25 @@ Each Non-Fungible Token represents a **Page**. Each Page has the following field
 </thead>
 <tbody>
   <tr>
-    <td class="tg-9wq8">Title</td>
+    <td class="tg-9wq8">Page Title</td>
     <td class="tg-9wq8">Title of the Page</td>
     <td class="tg-9wq8"><span style="font-style:italic">string (UTF-8)</td>
     <td class="tg-9wq8">yes</td>
   </tr>
   <tr>
-    <td class="tg-9wq8">Body</td>
+    <td class="tg-9wq8">Page Body</td>
     <td class="tg-9wq8">Actual contents of the Page</td>
     <td class="tg-9wq8"><span style="font-style:italic">string (UTF-8)</td>
     <td class="tg-9wq8">no</td>
   </tr>
   <tr>
-    <td class="tg-0lax">Rubric</td>
+    <td class="tg-0lax">Page Author</td>
     <td class="tg-baqh">Author signature</td>
     <td class="tg-0lax">string (UTF-8)</td>
     <td class="tg-baqh">yes</td>
   </tr>
   <tr>
-    <td class="tg-9wq8">Parent</td>
+    <td class="tg-9wq8">Parent Page</td>
     <td class="tg-9wq8">Id of parent Page/Token</td>
     <td class="tg-9wq8"><span style="font-style:italic">uint256</span></td>
     <td class="tg-9wq8">yes</td>
