@@ -27,30 +27,37 @@ const App = {
     } catch (error) {
       console.error("Could not connect to contract or chain.");
     }
-
-    // init ipfs
-    ipfs = await IPFS.create();
   },
 
   displayPage: async function() {
     const { tokenURI } = this.meta.methods;
     const tokenId = document.getElementById("tokenId").value;
 
-    const _tokenURI = await tokenURI(tokenId).call();
-    const metadata = await ipfs.catJSON(_tokenURI);
+    if (isNaN(tokenId)) {
+      window.alert("error: Page Token Id needs to be a number!");
+      return;
+    }
 
-    const title = metadata.title;
-    const body = metadata.body;
-    const author = metadata.author;
-    const parent = metadata.parent;
+    try {
+      const _tokenURI = await tokenURI(tokenId).call();
+      const metadata = await ipfs.catJSON(_tokenURI);
 
-    const display = document.getElementById("display");
-    let pageHTML = "<br>";
-    if (title) {pageHTML += "<br>Title: " + title};
-    pageHTML += "<br>Body: " + body;
-    if (author) {pageHTML += "<br> Author: " + author};
-    if (parent) {pageHTML += "<br>Parent Page Id: " + parent};
-    display.innerHTML = pageHTML;
+      const title = metadata.title;
+      const body = metadata.body;
+      const author = metadata.author;
+      const parent = metadata.parent;
+
+      const display = document.getElementById("display");
+      let pageHTML = "<br>";
+      if (title) {pageHTML += "<br>Title: " + title};
+      pageHTML += "<br>Body: " + body;
+      if (author) {pageHTML += "<br> Author: " + author};
+      if (parent) {pageHTML += "<br>Parent Page Id: " + parent};
+      display.innerHTML = pageHTML;
+    } catch(err) {
+      window.alert("error: non-existent Page Token Id!");
+      return;
+    }
   },
 
 };
