@@ -34,7 +34,7 @@ contract Letter is ERC721{
     _tokenIds.increment();
     uint256 newTokenId = _tokenIds.current();
     _tokenURIs[newTokenId] = _ipfsCID;
-    
+
     _mint(msg.sender, newTokenId);
 
     return newTokenId;
@@ -48,9 +48,6 @@ contract Letter is ERC721{
   returns (string memory) {
     require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 
-    string memory base = "ipfs://";
-    string memory _tokenURI = _tokenURIs[tokenId];
-
-    return string(abi.encodePacked(base, _tokenURI));
+    return _tokenURIs[tokenId];
   }
 }

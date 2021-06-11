@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NFT Letter</title>
+</head>
+<style>
+  input {
+    display: block;
+    margin-bottom: 12px;
+  }
+</style>
+
+<body onload="about()" style="font-family:helvetica;background-color:#EAEAEA;">
+  <center>
+    <h1 style="font-size:7vw">📜✍️</h1>
+    <label for="title">Page Title: (optional)</label>
+    <input type="text" id="title" size="50" placeholder="e.g.: 𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡" />
+
+    <label for="body">Page Body:</label>
+    <br>
+    <textarea id="body" rows="4" cols="60" placeholder="e.g.: 𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡, 𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢."></textarea>
+    <br><br>
+
+    <label for="author">Page Author: (optional)</label>
+    <input type="text" id="author" size="50" placeholder="e.g.: 𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮" />
+
+    <label for="parent">Parent Page Token Id: (optional)</label>
+    <input type="text" id="parent" size="50" placeholder="e.g.: 1337" />
+
+    <button onclick="App.createPage()">Mint Page</button>
+    <br>
+    <br>
+
+    <span id="status"></span>
+  </center>
+
+  <br>
+  <script src="mint.js"></script>
+</body>
+</html>

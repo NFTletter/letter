@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NFT Letter</title>
+</head>
+<style>
+  input {
+    display: block;
+    margin-bottom: 12px;
+  }
+</style>
+<body onload="about()" style="font-family:helvetica;background-color:#EAEAEA;">
+  <center>
+    <h1 style="font-size:7vw">📜✍️</h1>
+    <label for="title">Page Token Id:</label>
+    <input type="text" id="tokenId" size="50" placeholder="e.g.: 1337"/>
+    <button onclick="App.displayPage()">Display Page</button>
+    <span id="display"></span>
+  </center>
+  <script src="display.js"></script>
+</body>
+</html>
