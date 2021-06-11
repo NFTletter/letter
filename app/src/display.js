@@ -48,11 +48,12 @@ const App = {
       const parent = metadata.parent;
 
       const display = document.getElementById("display");
-      let pageHTML = "<br>";
-      if (title) {pageHTML += "<br>Title: " + title};
-      pageHTML += "<br>Body: " + body;
-      if (author) {pageHTML += "<br> Author: " + author};
-      if (parent) {pageHTML += "<br>Parent Page Id: " + parent};
+      let pageHTML = "<br><br><table><tbody>";
+      if (title) {pageHTML += "<tr><td style=\"vertical-align:bottom\">Title: </td><td>" + title + "</td></tr>"};
+      pageHTML += "<tr><td style=\"vertical-align:top\">Body: </td><td>" + body + "</td></tr>";
+      if (author) {pageHTML += "<tr><td style=\"vertical-align:top\">Author: </td><td>" + author + "</td></tr>"};
+      if (parent) {pageHTML += "<tr><td>Parent Page Id: </td><td>" + parent + "</td></tr>"};
+      pageHTML += "</tbody></table>"
       display.innerHTML = pageHTML;
     } catch(err) {
       window.alert("error: non-existent Page Token Id!");
