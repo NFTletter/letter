@@ -50,6 +50,7 @@ const App = {
       const display = document.getElementById("display");
       let pageHTML = "<br><br><table><tbody>";
       if (title) {pageHTML += "<tr><td style=\"vertical-align:bottom\">Title: </td><td>" + title + "</td></tr>"};
+      // ToDo: \n line break
       pageHTML += "<tr><td style=\"vertical-align:top\">Body: </td><td>" + body + "</td></tr>";
       if (author) {pageHTML += "<tr><td style=\"vertical-align:top\">Author: </td><td>" + author + "</td></tr>"};
       if (parent) {pageHTML += "<tr><td>Parent Page Id: </td><td>" + parent + "</td></tr>"};
