@@ -39,14 +39,46 @@ const App = {
 
   createPage: async function() {
     const { createPage } = this.meta.methods;
-    const title = document.getElementById("title").value;
-    const body = document.getElementById("body").value;
-    const author = document.getElementById("author").value;
-    const parent = document.getElementById("parent").value;
+    const { tokenURI } = this.meta.methods;
 
-    // ToDo: check parent tokenId is number
-    // ToDo: check parent tokenId exists
-    // ToDo: check body is not empty
+    // max 64 chars
+    const title = document.getElementById("title").value;
+    console.log(title.length);
+    if (title.length > 64) {
+      window.alert("error: Tile must have maximum 64 characters.");
+      return;
+    }
+
+    // not empty, max 65536 chars
+    const body = document.getElementById("body").value;
+    if (body.length == 0) {
+      window.alert("error: Body can't be empty.");
+      return;
+    } else if (body.length > 65536) {
+      window.alert("error: Body must have maximum 65536 characters.");
+      return;
+    }
+
+    // max 64 chars
+    const author = document.getElementById("author").value;
+    if (author.length > 64) {
+      window.alert("error: Author must have maximum 64 characters.");
+      return;
+    }
+
+    // is number, tokenId exists
+    const parent = document.getElementById("parent").value;
+    if (isNaN(parent)) {
+      window.alert("error: Page Token Id must be a number.");
+      return;
+    } else if (parent) {
+      try {
+        await tokenURI(parent).call();
+      } catch(err) {
+        window.alert("error: Non-existent Page Token Id!");
+        return;
+      }
+    }
 
     const pageJSON = {
       "title": title,
