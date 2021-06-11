@@ -17,8 +17,7 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.1.0",
     "@pinata/sdk": "^1.1.23",
-    "ipfs-core": "^0.7.1",
-    "it-to-buffer": "^2.0.0",
+    "ipfs-mini": "^1.1.5",
     "web3": "^1.2.4"
   },
   "main": "webpack.config.js",

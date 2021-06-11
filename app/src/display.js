@@ -1,9 +1,8 @@
 import Web3 from "web3";
 import letterArtifact from "../../build/contracts/Letter.json";
 
-const IPFS = require('ipfs-core');
-const toBuffer = require('it-to-buffer')
-var ipfs;
+const IPFS = require('ipfs-mini');
+const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 const App = {
   web3: null,
@@ -38,22 +37,20 @@ const App = {
     const tokenId = document.getElementById("tokenId").value;
 
     const _tokenURI = await tokenURI(tokenId).call();
-    console.log(_tokenURI);
+    const metadata = await ipfs.catJSON(_tokenURI);
 
-    const metadataBuf = await toBuffer(ipfs.cat(_tokenURI));
-    const metadata = metadataBuf.toString();
+    const title = metadata.title;
+    const body = metadata.body;
+    const author = metadata.author;
+    const parent = metadata.parent;
 
-    console.log(metadata);
-
-    // const title = metadata.title;
-    // const body = metadata.body;
-    // const author = metadata.author;
-    // const parent = metadata.parent;
-    //const display = document.getElementById("display");
-    //const pageHTML = "Title: " + title + "<br> Body: " + body + "<br> Author: " + author + "<br> Parent Page Id: " + parent;
-    //display.innerHTML = pageHTML;
-
-    //ipfs.destroy()
+    const display = document.getElementById("display");
+    let pageHTML = "<br>";
+    if (title) {pageHTML += "<br>Title: " + title};
+    pageHTML += "<br>Body: " + body;
+    if (author) {pageHTML += "<br> Author: " + author};
+    if (parent) {pageHTML += "<br>Parent Page Id: " + parent};
+    display.innerHTML = pageHTML;
   },
 
 };
