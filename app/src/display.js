@@ -53,6 +53,7 @@ const App = {
       pageHTML += "<tr><td style=\"vertical-align:top\">Body: </td><td>" + body + "</td></tr>";
       if (author) {pageHTML += "<tr><td style=\"vertical-align:top\">Author: </td><td>" + author + "</td></tr>"};
       if (parent) {pageHTML += "<tr><td>Parent Page Id: </td><td>" + parent + "</td></tr>"};
+      pageHTML += "<tr><td>IPFS CID: </td><td>" +  _tokenURI + "</td></tr>"
       pageHTML += "</tbody></table>"
       display.innerHTML = pageHTML;
     } catch(err) {
