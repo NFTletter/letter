@@ -31,6 +31,7 @@ const App = {
 
   displayPage: async function() {
     const { tokenURI } = this.meta.methods;
+    const { ownerOf } = this.meta.methods;
     const tokenId = document.getElementById("tokenId").value;
 
     if (isNaN(tokenId)) {
@@ -40,12 +41,14 @@ const App = {
 
     try {
       const _tokenURI = await tokenURI(tokenId).call();
+
       const metadata = await ipfs.catJSON(_tokenURI);
 
       const title = metadata.title;
       const body = metadata.body;
       const author = metadata.author;
       const parent = metadata.parent;
+      const owner = await ownerOf(tokenId).call();
 
       const display = document.getElementById("display");
       let pageHTML = "<br><br><table class=\"tg\" style=\"max-width:400px;\"><tbody>";
@@ -54,6 +57,7 @@ const App = {
       pageHTML += "<tr><td class=\"tg-left\">Body: </td><td class=\"tg-right\">" + body + "</td></tr>";
       if (author) {pageHTML += "<tr><td class=\"tg-left\">Author: </td><td class=\"tg-right\">" + author + "</td></tr>"};
       if (parent) {pageHTML += "<tr><td class=\"tg-left\">Parent Page Id: </td><td class=\"tg-right\">" + parent + "</td></tr>"};
+      pageHTML += "<tr><td class=\"tg-left\">Owner: </td><td class=\"tg-right\">" + owner + "</td></tr>"
       pageHTML += "<tr><td class=\"tg-left\">IPFS CID: </td><td class=\"tg-right\">" +  _tokenURI + "</td></tr>"
       pageHTML += "</tbody></table>"
       display.innerHTML = pageHTML;
