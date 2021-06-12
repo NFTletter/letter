@@ -48,13 +48,13 @@ const App = {
       const parent = metadata.parent;
 
       const display = document.getElementById("display");
-      let pageHTML = "<br><br><table><tbody>";
-      if (title) {pageHTML += "<tr><td style=\"vertical-align:bottom\">Title: </td><td>" + title + "</td></tr>"};
+      let pageHTML = "<br><br><table class=\"tg\" style=\"max-width:400px;\"><tbody>";
+      if (title) {pageHTML += "<tr><td class=\"tg-left\">Title: </td><td class=\"tg-right\">" + title + "</td></tr>"};
       // ToDo: \n line break
-      pageHTML += "<tr><td style=\"vertical-align:top\">Body: </td><td>" + body + "</td></tr>";
-      if (author) {pageHTML += "<tr><td style=\"vertical-align:top\">Author: </td><td>" + author + "</td></tr>"};
-      if (parent) {pageHTML += "<tr><td>Parent Page Id: </td><td>" + parent + "</td></tr>"};
-      pageHTML += "<tr><td>IPFS CID: </td><td>" +  _tokenURI + "</td></tr>"
+      pageHTML += "<tr><td class=\"tg-left\">Body: </td><td class=\"tg-right\">" + body + "</td></tr>";
+      if (author) {pageHTML += "<tr><td class=\"tg-left\">Author: </td><td class=\"tg-right\">" + author + "</td></tr>"};
+      if (parent) {pageHTML += "<tr><td class=\"tg-left\">Parent Page Id: </td><td class=\"tg-right\">" + parent + "</td></tr>"};
+      pageHTML += "<tr><td class=\"tg-left\">IPFS CID: </td><td class=\"tg-right\">" +  _tokenURI + "</td></tr>"
       pageHTML += "</tbody></table>"
       display.innerHTML = pageHTML;
     } catch(err) {

@@ -9,14 +9,18 @@
     margin-bottom: 12px;
   }
 </style>
-<body onload="about()" style="font-family:helvetica;background-color:#EAEAEA;">
+<body onload="about()" style="font-family:monospace;background-color:#EAEAEA;">
   <center>
     <h1 style="font-size:7vw">📜✍️</h1>
     <label for="title">Page Token Id:</label>
     <input type="text" id="tokenId" size="50" placeholder="e.g.: 1337"/>
     <button onclick="App.displayPage()">Display Page</button>
-    <span id="display"></span>
-    <br>
+    <style type="text/css">
+      .tg .tg-left{font-weight:bold;vertical-align:top;white-space:nowrap;}
+      .tg .tg-right{text-align:justify;vertical-align:top;color:#333333}
+    </style>
+    <span id="display" style="white-space: pre-wrap"></span>
+    <br><br>
     <table class="tg">
     <tbody>
       <tr>
