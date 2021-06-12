@@ -102,12 +102,14 @@ const App = {
     const ipfsCID = result.IpfsHash;
     console.log(result);
 
-    // ToDo: fix newTokenId
-    const newTokenId = await createPage(ipfsCID).send({from: this.account});
-    console.log(newTokenId);
-    const status = "Page Token Id: " + newTokenId + "<br> IPFS CID: " + ipfsCID;
+    // ToDo: check safety
+    const newTokenId = await createPage(ipfsCID).call({from: this.account});
+    await createPage(ipfsCID).send({from: this.account});
 
-    App.setStatus(status)
+    const status = "Page Token Id: " + newTokenId + "<br> IPFS CID: " + ipfsCID;
+    const note = "<br><br> Make sure you pin the IPFS CID above. We recommend <a href=\"https://pinata.cloud\"> Pinata</a>.";
+
+    App.setStatus(status + note)
   }
 
 };
