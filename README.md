@@ -105,6 +105,10 @@ $ cat << EOF > app/pinataConfig.json
 EOF
 ```
 
+⚠️ **Warning** ⚠️
+
+The keys above are fictitious and only exist for illustration purposes. The `SecretKey` is sensitive, so be extra careful with `app/pinataConfig.json`!
+
 3. Start Truffle and load the Smart Contract:
 ```
 $ truffle develop
