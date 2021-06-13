@@ -126,9 +126,9 @@ $ npm run dev
 
 ## Roadmap
 
-- [ ] Solidity Source Code (OpenZeppelin ERC-721).
-- [ ] Minter Front+Back End.
-- [ ] Display Front+Back End.
+- [x] Solidity Source Code (OpenZeppelin ERC-721).
+- [x] Minter Front+Back End.
+- [x] Display Front+Back End.
 - [ ] Brownie tests.
 - [ ] Testnet deployment.
 - [ ] Make Contract upgradable.
