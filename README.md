@@ -8,46 +8,82 @@
 **Letter** allows for art pieces such as **poems**, **novels**, **manifestos** and **source code** to be minted as Non-Fungible Tokens into the [Ethereum](https://ethereum.org/en/) blockchain.
 
 
-Each Non-Fungible Token represents a **Page**. Each Page has the following fields:
+Each Non-Fungible Token represents a **Page**. The NFT metadata representing each Page is encoded as a `.json` UTF-8 file to be pinned on [IPFS](https://ipfs.io/).
 
-<table class="tg">
-<thead>
-  <tr>
-    <th class="tg-roi2">Field<br></th>
-    <th class="tg-roi2">Description</th>
-    <th class="tg-roi2">Encoding</th>
-    <th class="tg-roi2">Optional?</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-9wq8">Page Title</td>
-    <td class="tg-9wq8">Title of the Page</td>
-    <td class="tg-9wq8"><span style="font-style:italic">string (UTF-8)</td>
-    <td class="tg-9wq8">yes</td>
-  </tr>
-  <tr>
-    <td class="tg-9wq8">Page Body</td>
-    <td class="tg-9wq8">Actual contents of the Page</td>
-    <td class="tg-9wq8"><span style="font-style:italic">string (UTF-8)</td>
-    <td class="tg-9wq8">no</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">Page Author</td>
-    <td class="tg-baqh">Author signature</td>
-    <td class="tg-0lax">string (UTF-8)</td>
-    <td class="tg-baqh">yes</td>
-  </tr>
-  <tr>
-    <td class="tg-9wq8">Parent Page</td>
-    <td class="tg-9wq8">Id of parent Page/Token</td>
-    <td class="tg-9wq8"><span style="font-style:italic">uint256</span></td>
-    <td class="tg-9wq8">yes</td>
-  </tr>
-</tbody>
-</table>
+Each Page follows this JSON Schema:
 
-The NFT metadata representing each Page is encoded as a `.json` UTF-8 file to be pinned on [IPFS](https://ipfs.io/).
+```
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://github.com/NFTletter/letter/json/example.json",
+  "type": "object",
+  "title": "NFT Letter Page Schema",
+  "description": "JSON Schema for NFT Pages on Letter ERC721.",
+  "default": {},
+  "examples": [
+      {
+          "title": "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡",
+          "body": "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡, 𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢.",
+          "author": "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮",
+          "parent": 1337
+      }
+  ],
+  "properties": {
+      "title": {
+          "$id": "#/properties/title",
+          "type": "string",
+          "title": "Page Title",
+          "description": "Optional field representing NFT Page Title.",
+          "minLength": 1,
+          "maxLength": 64,
+          "default": "",
+          "examples": [
+              "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡"
+          ]
+      },
+      "body": {
+          "$id": "#/properties/body",
+          "type": "string",
+          "title": "Page Body",
+          "description": "Mandatory field representing NFT Page Body.",
+          "minLength": 1,
+          "maxLength": 65536,
+          "default": "",
+          "examples": [
+              "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡, 𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢."
+          ]
+      },
+      "author": {
+          "$id": "#/properties/author",
+          "type": "string",
+          "title": "Page Author",
+          "description": "Optional field representing NFT Page Author.",
+          "minLength": 1,
+          "maxLength": 64,
+          "default": "",
+          "examples": [
+              "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮"
+          ]
+      },
+      "parent": {
+          "$id": "#/properties/parent",
+          "type": "integer",
+          "title": "Parent Page Token Id",
+          "description": "Optional field representing NFT Parent Page Token Id.",
+          "minimum": 1,
+          "maximum": 115792089237316195423570985008687907853269984665640564039457584007913129639935,
+          "default": 0,
+          "examples": [
+              1337
+          ]
+      }
+  },
+  "required": [
+    "body"
+  ]
+}
+```
+
 
 ## Instructions
 

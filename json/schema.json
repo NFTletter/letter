@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://github.com/NFTletter/letter/json/example.json",
+  "type": "object",
+  "title": "NFT Letter Page Schema",
+  "description": "JSON Schema for NFT Pages on Letter ERC721.",
+  "default": {},
+  "examples": [
+      {
+          "title": "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡",
+          "body": "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡, 𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢.",
+          "author": "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮",
+          "parent": 1337
+      }
+  ],
+  "required": [
+      "title",
+      "body",
+      "author",
+      "parent"
+  ],
+  "properties": {
+      "title": {
+          "$id": "#/properties/title",
+          "type": "string",
+          "title": "Page Title",
+          "description": "Optional field representing NFT Page Title.",
+          "minLength": 1,
+          "maxLength": 64,
+          "default": "",
+          "examples": [
+              "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡"
+          ]
+      },
+      "body": {
+          "$id": "#/properties/body",
+          "type": "string",
+          "title": "Page Body",
+          "description": "Mandatory field representing NFT Page Body.",
+          "minLength": 1,
+          "maxLength": 65536,
+          "default": "",
+          "examples": [
+              "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡, 𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢."
+          ]
+      },
+      "author": {
+          "$id": "#/properties/author",
+          "type": "string",
+          "title": "Page Author",
+          "description": "Optional field representing NFT Page Author.",
+          "minLength": 1,
+          "maxLength": 64,
+          "default": "",
+          "examples": [
+              "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮"
+          ]
+      },
+      "parent": {
+          "$id": "#/properties/parent",
+          "type": "integer",
+          "title": "Parent Page Token Id",
+          "description": "Optional field representing NFT Parent Page Token Id.",
+          "minimum": 1,
+          "maximum": 115792089237316195423570985008687907853269984665640564039457584007913129639935,
+          "default": 0,
+          "examples": [
+              1337
+          ]
+      }
+  },
+  "required": [
+    "body"
+  ]
+}
