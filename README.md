@@ -43,12 +43,48 @@ The `letterId[tokenId]` mapping assigns which Letter each Page belongs to.
 
 If a Page `tokenId` is some Letter's head (`letterId[tokenId] == tokenId`), then it has no Parent Page Id (`parentTokenId[tokenId] == 0`).
 
-In order to append a Page `newTokenId` to a Letter `xId`, such that `letterId[newTokenId] = xId`, `msg.sender` must own `xId`. In other words, only the owner of a Letter can append Pages to it.
-
 While minting a new Page `tokenId`, to be appended to some Letter `xId`, the following operations happen, in this specific sequence:
   - `parentTokenId[tokenId] = tailId[xId]`
   - `tailId[xId] = tokenId`
   - `letterId[tokenId] = xId`
+
+### Ownership
+
+Each Letter Page Token is `Ownable`.
+
+For some Page `_tokenId`, where `letterId[_tokenId] == xId`, only the owner of Letter `xId` can call `mintAppendPage(xId)`.
+
+### Role-Based Access Control (RBAC)
+
+#### Admin Role
+
+The `Admin` role allows for some `account` to modify the Letter Access Controls.
+
+For some Page `tokenId`, belonging to Letter `xId`, its `Admin` role is defined by `adminId = keccak256("ADMIN" + xId)`, which is a `byte32`. 
+
+The `onlyAdmin` modifier restricts access for the execution of the following functions:
+- `addAdmin(account, letterId)`
+- `addViewer(account, letterId)`
+- `revokeViewer(account, letterId)`
+- `openViewer(letterId)`
+- `closeViewer(letterId)`
+
+The function `renounceAdmin(letterId)` removes `msg.sender` from the role defined by `adminId = keccak256("ADMIN" + letterId)`.
+
+
+#### Viewer Role
+
+The `Viewer` role allows for some `account` to visualize the Letter contents.
+
+For some Page `tokenId`, belonging to Letter `xId`, its `Viewer` role is defined by `viewerId = keccak256("VIEWER" + xId)`, which is a `byte32`. 
+
+For some Page `tokenId`, the `Viewer` role is "open" whenever `isViewer(0, tokenId) == true`. In other words, a Letter with an "open" `Viewer` role, means `isViewer(account, tokenId) == true` for any `account`. This behavior is set/unset by the functions `openViewer(letterId)` and `closeViewer(letterId)`.
+
+The `onlyViewer` modifier restricts access for the execution of the following functions:
+- `viewTitle(tokenId)`
+- `viewBody(tokenId)`
+- `viewRubric(tokenId)`
+
 
 ## Roadmap
 
