@@ -10,34 +10,21 @@
 
 `Letter.sol` is `ERC721Upgradeable`, while `LetterFactory.sol` specifies a *[Contract Factory](https://docs.openzeppelin.com/contracts/4.x/api/proxy)*.
 
-Every time a new `Letter` is minted, a new *Proxy Contract* is deployed, with logic residing the *Implementation Contract*, defined by `Letter.sol`. Within a `Letter` *Proxy Contract*, each NFT represents a single `Page`.
+Every time a new `Letter` is minted, a new *Proxy Contract* is deployed, with logic residing the *Implementation Contract*, defined by `Letter.sol`.
 
 A `Letter` has the following attributes:
 - `string private _title`: max 64 characters, optionally empty.
 - `string private _author`: max 64 characters, optionally empty.
-- `bool private _open`: represents whether `Viewer` role is necessary to view `Letter` contents.
 - `string[] private _pages`, each element represents a `Page`, min 1, max 65536 characters per `Page`.
+- `bool private _open`: represents whether `Viewer` role is necessary to view `Letter` contents.
 
-Each `Page` is a Token under the `Letter` *Proxy Contract*.
+Each `Page` is a Non-Fungible Token (**NFT**) under the `Letter` *Proxy Contract*.
 
 ### Ownership
 
-Each Letter Contract is `Ownable`. Only `Owner` is able to append new Page Tokens to some Letter Contract.
+Each `Letter` *Proxy Contract* is `Ownable`. Only the `Owner` is able to append new Pages a `Letter` by minting new NFTs.
 
 ### Role-Based Access Control (RBAC)
-
-#### Admin Role
-
-The `Admin` role allows for some `account` to modify the Access Controls of the Letter contract.
-
-The `onlyAdmin` modifier restricts access for the execution of the following functions:
-- `addAdmin(account)`
-- `addViewer(account)`
-- `revokeViewer(account)`
-- `openView()`
-- `closeView()`
-
-The function `renounceAdmin()` removes `msg.sender` from the role.
 
 #### Viewer Role
 
@@ -48,8 +35,19 @@ The `onlyViewer` modifier restricts access for the execution of the following fu
 - `viewBody(pageN)`
 - `viewAuthor()`
 
-
 The `_open` attribute of the `Letter` *Proxy Contract* overwrites the behavior of this role. If `isOpen() == true`, then `isViewer(account) == true` for any `account`.
+
+#### Admin Role
+
+The `Admin` role allows for some `account` to modify the Access Controls of the `Letter`.
+
+The `onlyAdmin` modifier restricts access for the execution of the following functions:
+- `addAdmin(account)`
+- `renounceAdmin()`
+- `addViewer(account)`
+- `revokeViewer(account)`
+- `openView()`
+- `closeView()`
 
 ## Roadmap
 
