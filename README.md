@@ -6,91 +6,57 @@
 
 **Letter** allows for art pieces such as **poems**, **novels**, **manifestos** and **source code** to be minted as Non-Fungible Tokens into the [Ethereum](https://ethereum.org/en/) blockchain. All text is stored on-chain.
 
-## Smart Contract Logic
+## Smart Contract
 
-### Page
+`Letter.sol` is `ERC721Upgradeable`, while `LetterFactory.sol` specifies a *[Contract Factory](https://docs.openzeppelin.com/contracts/4.x/api/proxy)*.
 
-Each NFT consist of a Page, represented by the following struct:
-```
-struct Page {
-  string title;
-  string body;
-  string rubric;
-}
-```
+Every time a new `Letter` is minted, a new *Proxy Contract* is deployed, with logic residing the *Implementation Contract*, defined by `Letter.sol`. Within a `Letter` *Proxy Contract*, each NFT represents a single `Page`.
 
-Where each field has the following properties:
-- `title`: optional, max 64 characters.
-- `body`: mandatory, max 65536 characters.
-- `rubric`: optional, max 64 characters.
+A `Letter` has the following attributes:
+- `string private _title`: max 64 characters, optionally empty.
+- `string private _author`: max 64 characters, optionally empty.
+- `bool private _open`: represents whether `Viewer` role is necessary to view `Letter` contents.
+- `string[] private _pages`, each element represents a `Page`, min 1, max 65536 characters per `Page`.
 
-A Page is identified by a `tokenId`.
-
-The `storage` mapping `page[tokenId]` creates the correspondance between each `tokenId` and its `struct Page`.
-
-### Letter
-
-A Letter is defined as a Linked List of Pages. Each Letter is identified by it's head Page's `tokenId`.
-
-A new Letter is created via the `mintLetter()` function.
-A new Page is appended to an existing Letter via the `mintAppendPage()` function.
-
-The `tailId[letterId]` mapping keeps track of the Letter's tail `tokenId`.
-
-The `parentTokenId[tokenId]` mapping assigns a Parent Page Id to some Page.
-
-The `letterId[tokenId]` mapping assigns which Letter each Page belongs to.
-
-If a Page `tokenId` is some Letter's head (`letterId[tokenId] == tokenId`), then it has no Parent Page Id (`parentTokenId[tokenId] == 0`).
-
-While minting a new Page `tokenId`, to be appended to some Letter `xId`, the following operations happen, in this specific sequence:
-  - `parentTokenId[tokenId] = tailId[xId]`
-  - `tailId[xId] = tokenId`
-  - `letterId[tokenId] = xId`
+Each `Page` is a Token under the `Letter` *Proxy Contract*.
 
 ### Ownership
 
-Each Letter Page Token is `Ownable`.
-
-For some Page `_tokenId`, where `letterId[_tokenId] == xId`, only the owner of Letter `xId` can call `mintAppendPage(xId)`.
+Each Letter Contract is `Ownable`. Only `Owner` is able to append new Page Tokens to some Letter Contract.
 
 ### Role-Based Access Control (RBAC)
 
 #### Admin Role
 
-The `Admin` role allows for some `account` to modify the Letter Access Controls.
-
-For some Page `tokenId`, belonging to Letter `xId`, its `Admin` role is defined by `adminId = keccak256("ADMIN" + xId)`, which is a `byte32`. 
+The `Admin` role allows for some `account` to modify the Access Controls of the Letter contract.
 
 The `onlyAdmin` modifier restricts access for the execution of the following functions:
-- `addAdmin(account, letterId)`
-- `addViewer(account, letterId)`
-- `revokeViewer(account, letterId)`
-- `openViewer(letterId)`
-- `closeViewer(letterId)`
+- `addAdmin(account)`
+- `addViewer(account)`
+- `revokeViewer(account)`
+- `openView()`
+- `closeView()`
 
-The function `renounceAdmin(letterId)` removes `msg.sender` from the role defined by `adminId = keccak256("ADMIN" + letterId)`.
-
+The function `renounceAdmin()` removes `msg.sender` from the role.
 
 #### Viewer Role
 
-The `Viewer` role allows for some `account` to visualize the Letter contents.
-
-For some Page `tokenId`, belonging to Letter `xId`, its `Viewer` role is defined by `viewerId = keccak256("VIEWER" + xId)`, which is a `byte32`. 
-
-For some Page `tokenId`, the `Viewer` role is "open" whenever `isViewer(0, tokenId) == true`. In other words, a Letter with an "open" `Viewer` role, means `isViewer(account, tokenId) == true` for any `account`. This behavior is set/unset by the functions `openViewer(letterId)` and `closeViewer(letterId)`.
+The `Viewer` role allows for some `account` to visualize the Letter Page Tokens.
 
 The `onlyViewer` modifier restricts access for the execution of the following functions:
-- `viewTitle(tokenId)`
-- `viewBody(tokenId)`
-- `viewRubric(tokenId)`
+- `viewTitle()`
+- `viewBody(pageN)`
+- `viewAuthor()`
 
+
+The `_open` attribute of the `Letter` *Proxy Contract* overwrites the behavior of this role. If `isOpen() == true`, then `isViewer(account) == true` for any `account`.
 
 ## Roadmap
 
-- [x] Solidity Source Code (OpenZeppelin ERC-721).
-- [ ] Ownable, Access Control.
-- [ ] Brownie tests.
+- [x] `Letter.json`.
+- [ ] Brownie tests for `Letter.json`.
+- [ ] `LetterFactory.json`.
+- [ ] Brownie tests for `LetterFactory.json`.
 - [ ] Minter Front End.
 - [ ] Display Front End.
 - [ ] Testnet deployment + Feedback.

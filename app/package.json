@@ -8,6 +8,7 @@
     "dev": "webpack-dev-server"
   },
   "devDependencies": {
+    "@openzeppelin/truffle-upgrades": "^1.7.1",
     "copy-webpack-plugin": "^5.0.5",
     "html-webpack-plugin": "^5.3.1",
     "webpack": "^4.41.2",
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.1.0",
+    "@openzeppelin/contracts-upgradeable": "^4.1.0",
     "@pinata/sdk": "^1.1.23",
     "ipfs-mini": "^1.1.5",
     "web3": "^1.2.4"
