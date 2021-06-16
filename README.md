@@ -45,10 +45,10 @@ The `onlyOwner` modifier restricts access for the execution of the following fun
 
 ## Roadmap
 
-- [x] `Letter.json`.
-- [x] Tests for `Letter.json`.
-- [ ] `LetterFactory.json`.
-- [ ] Tests for `LetterFactory.json`.
+- [x] `Letter.sol`.
+- [x] Tests for `Letter.sol`.
+- [ ] `LetterFactory.sol`.
+- [ ] Tests for `LetterFactory.sol`.
 - [ ] Minter Front End.
 - [ ] Display Front End.
 - [ ] Testnet deployment + Feedback.
