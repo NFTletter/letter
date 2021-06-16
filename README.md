@@ -22,11 +22,10 @@ Each `Page` is a Non-Fungible Token (**NFT**) under the `Letter` *Proxy Contract
 
 ### Ownership
 
-Each `Letter` *Proxy Contract* is `Ownable`. Only the `Owner` is able to append new Pages a `Letter` by minting new NFTs.
+Each `Letter` *Proxy Contract* is `Ownable`.
+Only the contract's `Owner` is able to mint new NFTs by appending new `Page`s to the `Letter`.
 
-### Role-Based Access Control (RBAC)
-
-#### Viewer Role
+### Viewer Role (Access Control)
 
 The `Viewer` role allows for some `account` to visualize the Letter Page Tokens.
 
@@ -35,11 +34,12 @@ The `onlyViewer` modifier restricts access for the execution of the following fu
 - `viewBody(pageN)`
 - `viewAuthor()`
 
-The `_open` attribute of the `Letter` *Proxy Contract* overwrites the behavior of this role. If `isOpen() == true`, then `isViewer(account) == true` for any `account`.
+The `_open` attribute of the `Letter` *Proxy Contract* overwrites the behavior of this role.
+If `isOpen() == true`, then `onlyViewer` has no effect, and every `account` is able to view `Letter` contents.
 
 The `onlyOwner` modifier restricts access for the execution of the following functions:
 - `addViewer(account)`
-- `revokeViewer(account)`
+- `removeViewer(account)`
 - `openView()`
 - `closeView()`
 
