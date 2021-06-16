@@ -31,6 +31,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     initializer {
 
         __ERC721_init("Letter", "LETT");__ERC721_init("Letter", "LETT");
+        __Ownable_init();
         
         // Page Body is mandatory, max 65536 characters
         require((getStringLength(_firstPageMint) != 0), "Cannot mint Letter with an empty first Page");
@@ -52,6 +53,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         _mint(msg.sender, _pageCounter.current());
 
         // Owner is Admin
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         grantRole(ADMIN_ROLE, msg.sender);
 
         // Owner is Viewer
