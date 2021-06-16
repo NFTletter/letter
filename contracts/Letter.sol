@@ -192,7 +192,6 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     function mintAppendPage(string memory _pageMint)
     public
     onlyOwner
-    returns (uint256)
     {
         // Page Body is mandatory, max 65536 characters
         require((getStringLength(_pageMint) != 0), "Cannot mint empty page");
@@ -205,8 +204,6 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         // save Page
         _pages.push(_pageMint);
 
-        // Return minted Page Number
-        return _pageNumber;
     }
 
     /// @dev override
