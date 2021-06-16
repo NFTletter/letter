@@ -52,9 +52,9 @@ The `onlyAdmin` modifier restricts access for the execution of the following fun
 ## Roadmap
 
 - [x] `Letter.json`.
-- [ ] Brownie tests for `Letter.json`.
+- [ ] Tests for `Letter.json`.
 - [ ] `LetterFactory.json`.
-- [ ] Brownie tests for `LetterFactory.json`.
+- [ ] Tests for `LetterFactory.json`.
 - [ ] Minter Front End.
 - [ ] Display Front End.
 - [ ] Testnet deployment + Feedback.
