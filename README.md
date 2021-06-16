@@ -13,12 +13,20 @@
 Every time a new `Letter` is minted, a new *Proxy Contract* is deployed, with logic residing the *Implementation Contract*, defined by `Letter.sol`.
 
 A `Letter` has the following attributes:
-- `string private _title`: max 64 characters, optionally empty.
-- `string private _author`: max 64 characters, optionally empty.
-- `string[] private _pages`, each element represents a `Page`, min 1, max 65536 characters per `Page`.
+- `string private _title`: max **64** characters, optionally empty.
+- `string private _author`: max **64** characters, optionally empty.
+- `string[] private _pages`, each element represents a `Page`, min 1, max **65536** characters per `Page`.
 - `bool private _open`: represents whether `Viewer` role is necessary to view `Letter` contents.
 
 Each `Page` is a Non-Fungible Token (**NFT**) under the `Letter` *Proxy Contract*.
+
+### Gas
+
+The number of characters on each `Letter`s title, author and `Page` contents determine gas fees to be paid by the NFT minter.
+
+Larger `Letter`s are more expensive to mint.
+
+This economic dynamic discourages vandalism and meaningless NFTs.
 
 ### Ownership
 
