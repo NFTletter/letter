@@ -59,6 +59,9 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         emit letterInit(msg.sender, _titleMint, _authorMint);
         emit pageMint(msg.sender, _firstPageMint, _pageNumber);
 
+        // increment page counter
+        _pageCounter.increment();
+
         // Owner is Admin
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         grantRole(ADMIN_ROLE, msg.sender);
@@ -153,7 +156,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     view
     onlyViewer
     returns (string memory) {
-        require ((_pageN <= _pageCounter.current()), "Can't view non-existent Page");
+        require ((_pageN < _pageCounter.current()), "Can't view non-existent Page");
         return _pages[_pageN];
     }
 
@@ -199,12 +202,12 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         require((getStringLength(_pageMint) != 0), "Cannot mint empty page");
         require((getStringLength(_pageMint) <= 65536), "Page max length: 65536");
 
+        // Mint Page Token
+        uint256 newPageN = _pageCounter.current();
+        _mint(msg.sender, newPageN);
+
         // increment page counter
         _pageCounter.increment();
-        uint256 newPageN = _pageCounter.current();
-
-        // Mint Page Token
-        _mint(msg.sender, newPageN);
 
         // Return minted Page Number
         return newPageN;
