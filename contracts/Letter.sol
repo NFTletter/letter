@@ -60,7 +60,6 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
 
         // Owner is Admin
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        grantRole(ADMIN_ROLE, msg.sender);
 
         // Owner is Viewer
         grantRole(VIEWER_ROLE, msg.sender);
@@ -68,7 +67,6 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
 
     // ---------------------------------------
     // Access Control
-    bytes32 private constant ADMIN_ROLE = keccak256("ADMIN");
     bytes32 private constant VIEWER_ROLE = keccak256("VIEWER");
 
     modifier onlyViewer() {
@@ -78,34 +76,19 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         _;
     }
 
-    /// @dev Add an account to the Admin role of _letterId. Restricted to Admins.
-    function addAdmin(address _account)
-    public
-    virtual
-    onlyRole(DEFAULT_ADMIN_ROLE) {
-        grantRole(ADMIN_ROLE, _account);
-    }
-
-    /// @dev Remove oneself from the admin role.
-    function renounceAdmin()
-    public
-    virtual {
-        renounceRole(ADMIN_ROLE, msg.sender);
-    }
-
-    /// @dev Add an account to the Viewer role. Restricted to Admins.
+    /// @dev Add an account to the Viewer role. Restricted to Owner.
     function addViewer(address _account)
     public
     virtual
-    onlyRole(ADMIN_ROLE) {
+    onlyOwner {
         grantRole(VIEWER_ROLE, _account);
     }
 
-    /// @dev Remove an account from the Viewer role. Restricted to admins.
+    /// @dev Remove an account from the Viewer role. Restricted to Owner.
     function removeViewer(address _account)
     public
     virtual
-    onlyRole(ADMIN_ROLE) {
+    onlyOwner {
         revokeRole(VIEWER_ROLE, _account);
     }
 
@@ -113,7 +96,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     function openView()
     public
     virtual
-    onlyRole(ADMIN_ROLE) {
+    onlyOwner {
         _open = true;
     }
 
@@ -121,7 +104,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     function closeView()
     public
     virtual
-    onlyRole(ADMIN_ROLE) {
+    onlyOwner {
         _open = false;
     }
 

@@ -37,13 +37,7 @@ The `onlyViewer` modifier restricts access for the execution of the following fu
 
 The `_open` attribute of the `Letter` *Proxy Contract* overwrites the behavior of this role. If `isOpen() == true`, then `isViewer(account) == true` for any `account`.
 
-#### Admin Role
-
-The `Admin` role allows for some `account` to modify the Access Controls of the `Letter`.
-
-The `onlyAdmin` modifier restricts access for the execution of the following functions:
-- `addAdmin(account)`
-- `renounceAdmin()`
+The `onlyOwner` modifier restricts access for the execution of the following functions:
 - `addViewer(account)`
 - `revokeViewer(account)`
 - `openView()`
