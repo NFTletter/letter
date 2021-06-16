@@ -20,6 +20,10 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     bool private _open;
     string[] private _pages; // Each page is a Token
 
+    // Letter events
+    event letterInit(address owner, string _titleMint, string _authorMint);
+    event pageMint(address owner, string page, uint256 pageNumber);
+
     // Safely count Pages
     using Counters for Counters.Counter;
     Counters.Counter private _pageCounter;
@@ -50,7 +54,10 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         }
 
         // Mint first Page
-        _mint(msg.sender, _pageCounter.current());
+        uint256 _pageNumber = _pageCounter.current();
+        _mint(msg.sender, _pageNumber);
+        emit letterInit(msg.sender, _titleMint, _authorMint);
+        emit pageMint(msg.sender, _firstPageMint, _pageNumber);
 
         // Owner is Admin
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
