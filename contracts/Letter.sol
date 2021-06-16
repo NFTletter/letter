@@ -26,7 +26,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
 
     // ---------------------------------------
     // Initializer
-    function createLetter(string memory _titleMint, string memory _firstPageMint, string memory _authorMint)
+    function initLetter(string memory _titleMint, string memory _firstPageMint, string memory _authorMint)
     public
     initializer {
 
