@@ -24,10 +24,6 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     event letterInit(address owner, string _titleMint, string _authorMint);
     event pageMint(address owner, string page, uint256 pageNumber);
 
-    // Safely count Pages
-    using Counters for Counters.Counter;
-    Counters.Counter private _pageCounter;
-
     // ---------------------------------------
     // Initializer
     function initLetter(string memory _titleMint, string memory _firstPageMint, string memory _authorMint)
@@ -54,13 +50,13 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         }
 
         // Mint first Page
-        uint256 _pageNumber = _pageCounter.current();
+        uint256 _pageNumber = _pages.length;
         _mint(msg.sender, _pageNumber);
         emit letterInit(msg.sender, _titleMint, _authorMint);
         emit pageMint(msg.sender, _firstPageMint, _pageNumber);
 
-        // increment page counter
-        _pageCounter.increment();
+        // save Page
+        _pages.push(_firstPageMint);
 
         // Owner is Admin
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
@@ -156,7 +152,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     view
     onlyViewer
     returns (string memory) {
-        require ((_pageN < _pageCounter.current()), "Can't view non-existent Page");
+        require ((_pageN < _pages.length), "Can't view non-existent Page");
         return _pages[_pageN];
     }
 
@@ -166,7 +162,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     view
     onlyViewer
     returns (uint256) {
-        return _pageCounter.current();
+        return _pages.length;
     }
 
     // @dev is open?
@@ -203,14 +199,14 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         require((getStringLength(_pageMint) <= 65536), "Page max length: 65536");
 
         // Mint Page Token
-        uint256 newPageN = _pageCounter.current();
-        _mint(msg.sender, newPageN);
+        uint256 _pageNumber = _pages.length;
+        _mint(msg.sender, _pageNumber);
 
-        // increment page counter
-        _pageCounter.increment();
+        // save Page
+        _pages.push(_pageMint);
 
         // Return minted Page Number
-        return newPageN;
+        return _pageNumber;
     }
 
     /// @dev override
