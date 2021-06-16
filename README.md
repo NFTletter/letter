@@ -8,7 +8,7 @@
 
 ## Smart Contract
 
-`Letter.sol` is `ERC721Upgradeable`, while `LetterFactory.sol` specifies a *[Contract Factory](https://docs.openzeppelin.com/contracts/4.x/api/proxy)*.
+`Letter.sol` is `ERC721Upgradeable`, while `LetterFactory.sol` specifies a *[Contract Cloning Factory](https://docs.openzeppelin.com/contracts/4.x/api/proxy#Clones)*.
 
 Every time a new `Letter` is minted, a new *Proxy Contract* is deployed, with logic residing the *Implementation Contract*, defined by `Letter.sol`.
 
