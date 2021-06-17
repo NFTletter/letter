@@ -6,6 +6,7 @@ var accounts;
 var alice;
 var bob;
 var carol;
+var dave;
 
 let VIEWER_ROLE = keccak256("VIEWER");
 
@@ -20,6 +21,7 @@ contract('Letter', (accs) => {
     alice = accounts[0];
     bob = accounts[1];
     carol = accounts[2];
+    dave = accounts[3];
 });
 
 it('fail to init Letter with empty first Page', async() => {
@@ -282,4 +284,73 @@ it('owner can remove viewer', async() => {
 
     // bob is not viewer
     assert.equal(await contract.hasRole(VIEWER_ROLE, bob), false);
+});
+
+it('new page owner is viewer, prev page owner remains viewer (transferFrom)', async() => {
+    let contract = await Letter.deployed();
+
+    // alice is page owner
+    assert.equal(await contract.ownerOf(0), alice);
+
+    // bob is not viewer
+    assert.equal(await contract.hasRole(VIEWER_ROLE, bob), false);
+
+    // transfer first page from alice to bob
+    await contract.transferFrom(alice, bob, 0, {from: alice});
+
+    // bob is page owner
+    assert.equal(await contract.ownerOf(0), bob);
+
+    // bob is viewer
+    assert.equal(await contract.hasRole(VIEWER_ROLE, bob), true);
+
+    // alice is still viewer
+    assert.equal(await contract.hasRole(VIEWER_ROLE, alice), true);
+
+});
+
+it('new page owner is viewer, prev page owner remains viewer (safeTransferFrom)', async() => {
+    let contract = await Letter.deployed();
+
+    // bob is page owner
+    assert.equal(await contract.ownerOf(0), bob);
+
+    // carol is not viewer
+    assert.equal(await contract.hasRole(VIEWER_ROLE, carol), false);
+
+    // transfer first page from bob to carol
+    await contract.transferFrom(bob, carol, 0, {from: bob});
+
+    // carol is page owner
+    assert.equal(await contract.ownerOf(0), carol);
+
+    // carol is viewer
+    assert.equal(await contract.hasRole(VIEWER_ROLE, carol), true);
+
+    // bob is still viewer
+    assert.equal(await contract.hasRole(VIEWER_ROLE, bob), true);
+
+});
+
+it('new page owner is viewer, prev page owner remains viewer (safeTransferFrom2)', async() => {
+    let contract = await Letter.deployed();
+
+    // carol is page owner
+    assert.equal(await contract.ownerOf(0), carol);
+
+    // dave is not viewer
+    assert.equal(await contract.hasRole(VIEWER_ROLE, dave), false);
+
+    // transfer first page from carol to dave
+    await contract.transferFrom(carol, dave, 0, {from: carol});
+
+    // davev is page owner
+    assert.equal(await contract.ownerOf(0), dave);
+
+    // dave is viewer
+    assert.equal(await contract.hasRole(VIEWER_ROLE, dave), true);
+
+    // carol is still viewer
+    assert.equal(await contract.hasRole(VIEWER_ROLE, carol), true);
+
 });

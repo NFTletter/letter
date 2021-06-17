@@ -24,6 +24,12 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     event letterInit(address owner, string _titleMint, string _authorMint);
     event pageMint(address owner, string page, uint256 pageNumber);
 
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    // Mapping owner address to token count
+    mapping(address => uint256) private _balances;
+
     // ---------------------------------------
     // Initializer
     function initLetter(string memory _titleMint, string memory _firstPageMint, string memory _authorMint)
@@ -196,6 +202,43 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
             interfaceId == type(IERC721Upgradeable).interfaceId ||
             interfaceId == type(IERC721MetadataUpgradeable).interfaceId ||
             super.supportsInterface(interfaceId);
+    }
+
+    /// @dev override so that Page owner belongs to Viewer role
+    function safeTransferFrom(address from, address to, uint256 tokenId)
+    public
+    virtual
+    override {
+        safeTransferFrom(from, to, tokenId, "");
+
+        // New Page owner belongs to Viewer role
+        _setupRole(VIEWER_ROLE, to);
+    }
+
+    /// @dev override so that Page owner belongs to Viewer role
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data)
+    public
+    virtual
+    override {
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        _safeTransfer(from, to, tokenId, _data);
+
+       // New Page owner belongs to Viewer role
+        _setupRole(VIEWER_ROLE, to);
+    }
+
+    /// @dev override so that Page owner belongs to Viewer role
+    function transferFrom(address from, address to, uint256 tokenId)
+    public
+    virtual
+    override {
+        //solhint-disable-next-line max-line-length
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+
+        _transfer(from, to, tokenId);
+
+        // New Page owner belongs to Viewer role
+        _setupRole(VIEWER_ROLE, to);
     }
 
 }

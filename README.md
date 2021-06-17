@@ -51,6 +51,8 @@ The `onlyOwner` modifier restricts access for the execution of the following fun
 - `openView()`
 - `closeView()`
 
+Whenever the ownership for some `Page` is transferred from `addressA` to `addressB`, `addressB` automatically receives the `Viewer` role for the entire `Letter`. The `Viewer` role is kept forever on `addressB`, even if it ever transfers the ownership of such page to any other Address.
+
 ## Roadmap
 
 - [x] `Letter.sol`.
