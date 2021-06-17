@@ -8,7 +8,7 @@
 
 ## Smart Contract
 
-`Letter.sol` is `ERC721Upgradeable`, while `LetterFactory.sol` specifies a *[Contract Cloning Factory](https://docs.openzeppelin.com/contracts/4.x/api/proxy#Clones)*.
+`Letter.sol` is `ERC721Upgradeable`, while `LetterFactory.sol` specifies a *[Contract Cloning Factory](https://blog.openzeppelin.com/workshop-recap-cheap-contract-deployment-through-clones/)*.
 
 Every time a new `Letter` is minted, a new *Contract Clone* is deployed, with logic residing the *Implementation Contract*, defined by `Letter.sol`.
 
@@ -59,6 +59,7 @@ Whenever the ownership for some `Page` is transferred from `addressA` to `addres
 - [x] Tests for `Letter.sol`.
 - [ ] `LetterFactory.sol`.
 - [ ] Tests for `LetterFactory.sol`.
+- [ ] Gas benchmarks.
 - [ ] Minter Front End.
 - [ ] Display Front End.
 - [ ] Testnet deployment + Feedback.
