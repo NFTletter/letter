@@ -6,9 +6,7 @@ var alice;
 var bob;
 var carol;
 
-contract('LetterFactory', (accs) => {
-    accounts = accs;
-
+contract('LetterFactory', (accounts) => {
     alice = accounts[0];
     bob = accounts[1];
     carol = accounts[2];

@@ -15,9 +15,7 @@ let firstPage = "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡";
 let secondPage = "𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢";
 let author = "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮";
 
-contract('Letter', (accs) => {
-    accounts = accs;
-
+contract('Letter', (accounts) => {
     alice = accounts[0];
     bob = accounts[1];
     carol = accounts[2];
