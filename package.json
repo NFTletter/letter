@@ -1,0 +1,33 @@
+{
+  "name": "letter",
+  "version": "1.0.0",
+  "description": "Letter is an ERC-721 Smart Contract that allows for the creation of text-based NFTs, meant for written artistic expression.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NFTletter/letter.git"
+  },
+  "keywords": [
+    "NFT"
+  ],
+  "author": "Bernardo A. Rodrigues <barodrigues@protonmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NFTletter/letter/issues"
+  },
+  "homepage": "https://github.com/NFTletter/letter#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.3.1",
+    "hardhat": "^2.4.0"
+  },
+  "dependencies": {
+    "keccak256": "^1.0.2"
+  }
+}
