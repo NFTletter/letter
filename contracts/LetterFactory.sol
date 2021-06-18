@@ -17,7 +17,7 @@ contract LetterFactory {
     external
     returns (address) {
         address letterClone = Clones.clone(letterImplementation);
-        Letter(letterClone).initLetter(_titleMint, _firstPageMint, _authorMint);
+        Letter(letterClone).initLetter(_titleMint, _firstPageMint, _authorMint, msg.sender);
         return letterClone;
     }
 }

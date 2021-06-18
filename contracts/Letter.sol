@@ -32,7 +32,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
 
     // ---------------------------------------
     // Initializer
-    function initLetter(string memory _titleMint, string memory _firstPageMint, string memory _authorMint)
+    function initLetter(string memory _titleMint, string memory _firstPageMint, string memory _authorMint, address _owner)
     public
     initializer {
 
@@ -57,18 +57,23 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
 
         // Mint first Page
         uint256 _pageNumber = _pages.length;
-        _mint(msg.sender, _pageNumber);
-        emit letterInit(msg.sender, _titleMint, _authorMint);
-        emit pageMint(msg.sender, _firstPageMint, _pageNumber);
+        _mint(_owner, _pageNumber);
+        emit letterInit(_owner, _titleMint, _authorMint);
+        emit pageMint(_owner, _firstPageMint, _pageNumber);
 
         // save Page
         _pages.push(_firstPageMint);
 
-        // Owner is Admin
+        // Factory Contract + Owner are Admin
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _setupRole(DEFAULT_ADMIN_ROLE, _owner);
 
         // Owner is Viewer
-        grantRole(VIEWER_ROLE, msg.sender);
+        grantRole(VIEWER_ROLE, _owner);
+
+        // set Letter Contract Owner
+        transferOwnership(_owner);
+
     }
 
     // ---------------------------------------

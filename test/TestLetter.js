@@ -27,7 +27,7 @@ it('fail to init Letter with empty first Page', async() => {
     let err = null;
 
     try {
-        await contract.initLetter(title, "", author);
+        await contract.initLetter(title, "", author, alice);
     } catch (error) {
         err = error;
     }
@@ -40,7 +40,7 @@ it('init Letter with title + author', async() => {
     let contract = await Letter.deployed();
 
     // alice inits Letter
-    await contract.initLetter(title, firstPage, author, {from: alice});
+    await contract.initLetter(title, firstPage, author, alice);
     let pageCount = await contract.viewPageCount();
 
     // assert Page

@@ -15,10 +15,9 @@ contract('LetterFactory', (accounts) => {
 it('create Letters from LetterFactory', async() => {
     const letterFactory = await LetterFactory.deployed();
 
-    const txA = await letterFactory.createLetter("titleA", "initPageA", "authorA", {from: alice});
-    const txB = await letterFactory.createLetter("titleB", "initPageB", "authorB", {from: bob});
-    const txC = await letterFactory.createLetter("titleC", "initPageC", "authorC", {from: carol});
+    const txA = await letterFactory.createLetter("titleA", "initPageA", "alice", {from: alice});
+    const txB = await letterFactory.createLetter("titleB", "initPageB", "bob", {from: bob});
+    const txC = await letterFactory.createLetter("titleC", "initPageC", "carol", {from: carol});
 
-    // ...
-
+    // ..
 });
