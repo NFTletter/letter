@@ -210,17 +210,6 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     }
 
     /// @dev override so that Page owner belongs to Viewer role
-    function safeTransferFrom(address from, address to, uint256 tokenId)
-    public
-    virtual
-    override {
-        safeTransferFrom(from, to, tokenId, "");
-
-        // New Page owner belongs to Viewer role
-        _setupRole(VIEWER_ROLE, to);
-    }
-
-    /// @dev override so that Page owner belongs to Viewer role
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data)
     public
     virtual
