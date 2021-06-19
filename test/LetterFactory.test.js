@@ -69,6 +69,59 @@ describe("LetterFactory Clone Creation tests", function () {
     });
 });
 
+describe("LetterFactory Clone Page appending tests", function () {
+    let title = "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡";
+    let firstPage = "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡";
+    let secondPage = "𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢";
+    let author = "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮";
+
+    let LetterFactory;
+    let letterFactory;
+    let provider;
+    let letter;
+
+    beforeEach(async function () {
+        [owner, alice] = await ethers.getSigners();
+
+        provider = ethers.getDefaultProvider();
+
+        LetterFactory = await ethers.getContractFactory("LetterFactory");
+        letterFactory = await LetterFactory.deploy();
+
+        const tx = await letterFactory.createLetter(title, firstPage, author);
+        const { events } = await tx.wait();
+        const { address: letterAddress } = events.find(Boolean);
+
+        letter = new ethers.Contract(letterAddress, letterABI, provider);
+    });
+
+    afterEach(async function () {
+        letterFactory = null;
+    });
+
+    it('owner can append new pages', async() => {
+        let page = "I can do this";
+    
+        await letter.connect(owner).mintAppendPage(page);
+    
+        expect(await letter.connect(owner).viewPageCount()).to.equal(2);
+    });
+
+    it('non-owner cannot append new pages', async() => {
+        let page = "I cannot do this";
+    
+        try {
+            await letter.connect(alice).mintAppendPage(page);
+        } catch (error) {
+            err = error;
+        }
+    
+        // failure of alice trying to append a new page
+        expect(err).to.be.an.instanceOf(Error);
+    });
+
+});
+
 describe("LetterFactory Clone View tests", function () {
     let title = "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡";
     let firstPage = "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡";
