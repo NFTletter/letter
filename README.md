@@ -15,7 +15,7 @@ Every time a new `Letter` is minted, a new *Contract Clone* is deployed, with lo
 A `Letter` has the following attributes:
 - `string private _title`: max **64** characters, optionally empty.
 - `string private _author`: max **64** characters, optionally empty.
-- `string[] private _pages`, each array element represents a `Page`, with min 1, and max **65536** characters per `Page`.
+- `string[] private _pages`, each array element represents a `Page`, with max **8192** characters per `Page`.
 - `bool private _open`: represents whether `Viewer` role is necessary to view `Letter` contents.
 
 Each `Page` is a Non-Fungible Token (**NFT**) under the `Letter` *Contract Clone*.

@@ -2,6 +2,10 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const keccak256 = require('keccak256');
 
+const MAX_TITLE_LEN = 64;
+const MAX_PAGE_LEN = 8192;
+const MAX_AUTHOR_LEN = 64;
+
 let title = "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡";
 let firstPage = "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡";
 let secondPage = "𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢";
@@ -10,6 +14,10 @@ let author = "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮";
 let Contract;
 let contract;
 let err;
+
+function genString(n) {
+    return new Array(n + 1).join('0');
+}
 
 describe("Letter Contract Initialization tests", function () {
     beforeEach(async function () {
@@ -21,20 +29,60 @@ describe("Letter Contract Initialization tests", function () {
 
     afterEach(async function () {
         contract = null;
+        err = null;
     });
 
-    it('fail to init Letter with empty first Page', async() => {
+    it('init empty Letter', async() => {
+        // owner inits Letter
+        await contract.initLetter("", "", "", owner.address);
+        let pageCount = await contract.viewPageCount();
+    
+        // expect first Page
+        expect(pageCount.toNumber()).to.equal(1);
+        expect(await contract.viewPage(0)).to.equal("");
+        
+        // expect title + author
+        expect(await contract.viewTitle()).to.equal("");
+        expect(await contract.viewAuthor()).to.equal("");
+    
+        // expect is initally closed
+        expect(await contract.isOpen()).to.equal(false);
+    });
+
+    it('init Letter exceed Title chars', async() => {
         try {
-            await contract.initLetter(title, "", author, owner.address);
+            await contract.initLetter(genString(MAX_TITLE_LEN + 1), "", "", owner.address);
         } catch (error) {
             err = error;
         }
     
-        // failure to init Letter with empty first Page
+        // failure of alice trying to append a new page
+        expect(err).to.be.an.instanceOf(Error);
+    });
+
+    it('init Letter exceed Page chars', async() => {
+        try {
+            await contract.initLetter("", genString(MAX_PAGE_LEN + 1), "", owner.address);
+        } catch (error) {
+            err = error;
+        }
+    
+        // failure of alice trying to append a new page
+        expect(err).to.be.an.instanceOf(Error);
+    });
+
+    it('init Letter exceed Author chars', async() => {
+        try {
+            await contract.initLetter("", "", genString(MAX_AUTHOR_LEN + 1), owner.address);
+        } catch (error) {
+            err = error;
+        }
+    
+        // failure of alice trying to append a new page
         expect(err).to.be.an.instanceOf(Error);
     });
     
-    it('init Letter with title + author', async() => {
+    it('init Letter', async() => {
     
         // owner inits Letter
         await contract.initLetter(title, firstPage, author, owner.address);
@@ -79,6 +127,18 @@ describe("Letter Contract Page appending tests", function () {
 
     afterEach(async function () {
         contract = null;
+        err = null;
+    });
+
+    it('exceed appended page chars', async() => {
+        try {
+            await contract.mintAppendPage(genString(MAX_PAGE_LEN + 1), {from: owner.address});
+        } catch (error) {
+            err = error;
+        }
+    
+        // failure of alice trying to append a new page
+        expect(err).to.be.an.instanceOf(Error);
     });
 
     it('owner can append new pages', async() => {

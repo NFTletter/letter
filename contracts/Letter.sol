@@ -14,6 +14,11 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeable {
 
+    // Letter constants
+    uint private constant MAX_TITLE_LEN = 64;
+    uint private constant MAX_PAGE_LEN = 8192;
+    uint private constant MAX_AUTHOR_LEN = 64;
+
     // Letter vars
     string private _title;
     string private _author;
@@ -38,20 +43,21 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
 
         __ERC721_init("Letter", "LETT");__ERC721_init("Letter", "LETT");
         __Ownable_init();
-        
-        // Page Body is mandatory, max 65536 characters
-        require((getStringLength(_firstPageMint) != 0), "Cannot mint Letter with an empty first Page");
-        require((getStringLength(_firstPageMint) <= 65536), "Page max length: 65536");
 
         // Page Title is optional, max 64 characters
         if (getStringLength(_titleMint) != 0) {
-            require((getStringLength(_titleMint) <= 64), "Title max length: 64");
+            require((getStringLength(_titleMint) <= MAX_TITLE_LEN), "Title exceeds MAX_TITLE_LEN");
             _title = _titleMint;
+        }
+
+                // Page Body is optional, max 8192 characters
+        if (getStringLength(_firstPageMint) != 0){
+            require((getStringLength(_firstPageMint) <= MAX_PAGE_LEN), "Page exceed MAX_PAGE_LEN");
         }
         
         // Page Author is optional, max 64 characters
         if (getStringLength(_authorMint) != 0) {
-            require((getStringLength(_authorMint) <= 64), "Author max length: 64");
+            require((getStringLength(_authorMint) <= MAX_AUTHOR_LEN), "Author exceeds MAX_AUTHOR_LEN");
             _author = _authorMint;
         }
 
@@ -189,7 +195,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     {
         // Page Body is mandatory, max 65536 characters
         require((getStringLength(_pageMint) != 0), "Cannot mint empty page");
-        require((getStringLength(_pageMint) <= 65536), "Page max length: 65536");
+        require((getStringLength(_pageMint) <= MAX_PAGE_LEN), "Page exceeds MAX_PAGE_LEN");
 
         // Mint Page Token
         uint256 _pageNumber = _pages.length;
