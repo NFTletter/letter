@@ -96,7 +96,7 @@ describe("Letter Contract Initialization tests", function () {
         expect(await contract.ownerOf(0)).to.equal(owner.address);
     
         // mint second Page
-        await contract.mintAppendPage(secondPage);;
+        await contract.mintPage(secondPage);;
         pageCount = await contract.viewPageCount();
     
         // expect second Page
@@ -132,7 +132,7 @@ describe("Letter Contract Page appending tests", function () {
 
     it('exceed appended page chars', async() => {
         try {
-            await contract.mintAppendPage(genString(MAX_PAGE_LEN + 1), {from: owner.address});
+            await contract.mintPage(genString(MAX_PAGE_LEN + 1), {from: owner.address});
         } catch (error) {
             err = error;
         }
@@ -144,7 +144,7 @@ describe("Letter Contract Page appending tests", function () {
     it('owner can append new pages', async() => {
         let page = "I can do this";
     
-        await contract.mintAppendPage(page, {from: owner.address});
+        await contract.mintPage(page, {from: owner.address});
     
         expect(await contract.viewPageCount()).to.equal(2);
     });
@@ -153,7 +153,7 @@ describe("Letter Contract Page appending tests", function () {
         let page = "I cannot do this";
     
         try {
-            await contract.mintAppendPage(page, {from: alice.address});
+            await contract.mintPage(page, {from: alice.address});
         } catch (error) {
             err = error;
         }
@@ -177,7 +177,7 @@ describe("Letter Contract View tests", function () {
         await contract.initLetter(title, firstPage, author, owner.address);
 
         // mint second Page
-        await contract.mintAppendPage(secondPage);
+        await contract.mintPage(secondPage);
     });
 
     afterEach(async function () {

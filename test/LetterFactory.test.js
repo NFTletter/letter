@@ -59,9 +59,9 @@ describe("LetterFactory Clone Creation tests", function () {
         expect(await letterB.connect(bob).viewAuthor()).to.equal("bob");
 
         // append new Pages
-        await letter0.connect(owner).mintAppendPage("secondPage0");
-        await letterA.connect(alice).mintAppendPage("secondPageA");
-        await letterB.connect(bob).mintAppendPage("secondPageB");
+        await letter0.connect(owner).mintPage("secondPage0");
+        await letterA.connect(alice).mintPage("secondPageA");
+        await letterB.connect(bob).mintPage("secondPageB");
 
         // check appended Pages
         expect(await letter0.connect(owner).viewPage(1)).to.equal("secondPage0");
@@ -104,7 +104,7 @@ describe("LetterFactory Clone Page appending tests", function () {
     it('owner can append new pages', async() => {
         let page = "I can do this";
     
-        await letter.connect(owner).mintAppendPage(page);
+        await letter.connect(owner).mintPage(page);
     
         expect(await letter.connect(owner).viewPageCount()).to.equal(2);
     });
@@ -113,7 +113,7 @@ describe("LetterFactory Clone Page appending tests", function () {
         let page = "I cannot do this";
     
         try {
-            await letter.connect(alice).mintAppendPage(page);
+            await letter.connect(alice).mintPage(page);
         } catch (error) {
             err = error;
         }

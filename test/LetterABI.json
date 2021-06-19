@@ -441,7 +441,7 @@
 				"type": "string"
 			}
 		],
-		"name": "mintAppendPage",
+		"name": "mintPage",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

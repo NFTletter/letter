@@ -189,7 +189,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     // Mint new Page function
 
     /// @dev mint new Page, append to Letter
-    function mintAppendPage(string memory _pageMint)
+    function mintPage(string memory _pageMint)
     public
     onlyOwner
     {
