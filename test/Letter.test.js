@@ -140,6 +140,18 @@ describe("Letter Contract View tests", function () {
         expect(await contract.hasRole(VIEWER_ROLE, bob.address)).to.equal(false);
     });
     
+    it('owner can add viewer', async() => {
+    
+        // alice is not viewer
+        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(false);
+    
+        // owner adds alice as viewer
+        await contract.addViewer(alice.address);
+    
+        // alice is viewer
+        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(true);
+    });
+
     it('non-owner cannot open view', async() => {
     
         // alice is not owner
@@ -241,18 +253,6 @@ describe("Letter Contract View tests", function () {
         expect(viewedFirstPage).to.equal(firstPage);
         expect(viewedSecondPage).to.equal(secondPage);
         expect(viewedAuthor).to.equal(author);    
-    });
-    
-    it('owner can add viewer', async() => {
-    
-        // alice is not viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(false);
-    
-        // owner adds alice as viewer
-        await contract.addViewer(alice.address);
-    
-        // alice is viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(true);
     });
     
     it('viewer can view closed letter', async() => {
