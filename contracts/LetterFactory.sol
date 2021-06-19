@@ -13,11 +13,11 @@ contract LetterFactory {
         letterImplementation = address(new Letter());
     }
 
-    function createLetter(string memory _titleMint, string memory _firstPageMint, string memory _authorMint)
+    function createLetter(string memory _title, string memory _firstPage, string memory _author)
     external
     returns (address) {
         address letterClone = Clones.clone(letterImplementation);
-        Letter(letterClone).initLetter(_titleMint, _firstPageMint, _authorMint, msg.sender);
+        Letter(letterClone).initLetter(_title, _firstPage, _author, msg.sender);
         return letterClone;
     }
 }
