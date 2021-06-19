@@ -57,8 +57,8 @@ Whenever the ownership for some `Page` is transferred from `addressA` to `addres
 
 - [x] `Letter.sol`.
 - [x] Tests for `Letter.sol`.
-- [ ] `LetterFactory.sol`.
-- [ ] Tests for `LetterFactory.sol`.
+- [x] `LetterFactory.sol`.
+- [x] Tests for `LetterFactory.sol`.
 - [ ] Gas benchmarks.
 - [ ] Minter Front End.
 - [ ] Display Front End.
