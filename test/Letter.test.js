@@ -65,6 +65,45 @@ describe("Letter Contract Initialization tests", function () {
 
 });
 
+describe("Letter Contract Page appending tests", function () {
+    beforeEach(async function () {
+        [owner, alice, bob] = await ethers.getSigners()
+
+        Contract = await ethers.getContractFactory("Letter");
+        contract = await Contract.deploy();
+
+        // owner inits Letter
+        await contract.initLetter(title, firstPage, author, owner.address);
+
+    });
+
+    afterEach(async function () {
+        contract = null;
+    });
+
+    it('owner can append new pages', async() => {
+        let page = "I can do this";
+    
+        await contract.mintAppendPage(page, {from: owner.address});
+    
+        expect(await contract.viewPageCount()).to.equal(2);
+    });
+
+    it('non-owner cannot append new pages', async() => {
+        let page = "I cannot do this";
+    
+        try {
+            await contract.mintAppendPage(page, {from: alice.address});
+        } catch (error) {
+            err = error;
+        }
+    
+        // failure of alice trying to append a new page
+        expect(err).to.be.an.instanceOf(Error);
+    });
+
+});
+
 describe("Letter Contract View tests", function () {
     let VIEWER_ROLE = keccak256("VIEWER");
 
@@ -83,19 +122,6 @@ describe("Letter Contract View tests", function () {
 
     afterEach(async function () {
         contract = null;
-    });
-
-    it('non-owner cannot append new pages', async() => {
-        let page = "I cannot do this";
-    
-        try {
-            await contract.mintAppendPage(page, {from: alice.address});
-        } catch (error) {
-            err = error;
-        }
-    
-        // failure of alice trying to append a new page
-        expect(err).to.be.an.instanceOf(Error);
     });
     
     it('non-owner cannot add viewer', async() => {
