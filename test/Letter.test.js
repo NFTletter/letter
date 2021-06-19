@@ -209,7 +209,7 @@ describe("Letter Contract View tests", function () {
     
         await contract.closeView({from: owner.address});
     
-        // alice was able to close view
+        // owner was able to close view
         expect(await contract.isOpen()).to.equal(false);
     });
     
@@ -230,7 +230,7 @@ describe("Letter Contract View tests", function () {
             err = error;
         }
     
-        // failure of alices trying view closed letter
+        // failure of alice trying view closed letter
         expect(err).to.be.an.instanceOf(Error);
     });
     
