@@ -27,12 +27,18 @@ describe("LetterFactory Clone Creation tests", function () {
         const txA = await letterFactory.connect(alice).createLetter("titleA", "initPageA", "alice");
         const txB = await letterFactory.connect(bob).createLetter("titleB", "initPageB", "bob");
 
+        expect(await letterFactory.viewLetterCount()).to.equal(3);
+
         const { events: events0 } = await tx0.wait();
         const { address: address0 } = events0.find(Boolean);
         const { events: eventsA } = await txA.wait();
         const { address: addressA } = eventsA.find(Boolean);
         const { events: eventsB } = await txB.wait();
         const { address: addressB } = eventsB.find(Boolean);
+
+        expect(await letterFactory.viewLetterAddr(0)).to.equal(address0);
+        expect(await letterFactory.viewLetterAddr(1)).to.equal(addressA);
+        expect(await letterFactory.viewLetterAddr(2)).to.equal(addressB);
 
         let letter0 = new ethers.Contract(address0, letterABI, provider);
         let letterA = new ethers.Contract(addressA, letterABI, provider);
