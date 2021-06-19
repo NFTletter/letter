@@ -2,17 +2,16 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const keccak256 = require('keccak256');
 
+let title = "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡";
+let firstPage = "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡";
+let secondPage = "𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢";
+let author = "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮";
+
+let Contract;
+let contract;
+let err;
+
 describe("Letter Contract Initialization tests", function () {
-
-    let title = "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡";
-    let firstPage = "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡";
-    let secondPage = "𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢";
-    let author = "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮";
-
-    let Contract;
-    let contract;
-    let err;
-
     beforeEach(async function () {
         [owner] = await ethers.getSigners()
 
@@ -68,15 +67,6 @@ describe("Letter Contract Initialization tests", function () {
 
 describe("Letter Contract View tests", function () {
     let VIEWER_ROLE = keccak256("VIEWER");
-
-    let title = "𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡";
-    let firstPage = "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡";
-    let secondPage = "𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢";
-    let author = "𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮";
-
-    let Contract;
-    let contract;
-    let err;
 
     beforeEach(async function () {
         [owner, alice, bob] = await ethers.getSigners()
