@@ -189,7 +189,7 @@ describe("Letter Contract View tests", function () {
         expect(await contract.isOpen()).to.equal(true);
     
         try {
-            await contract.closeView({from: bob});
+            await contract.closeView({from: alice});
         } catch (error) {
             err = error;
         }
