@@ -135,7 +135,7 @@ describe("Letter Contract View tests", function () {
             err = error;
         }
     
-        // failure of bob trying to add carol as viewer
+        // failure of alice trying to add bob as viewer
         expect(err).to.be.an.instanceOf(Error);
         expect(await contract.hasRole(VIEWER_ROLE, bob.address)).to.equal(false);
     });
@@ -151,7 +151,7 @@ describe("Letter Contract View tests", function () {
             err = error;
         }
     
-        // failure of bob trying to open view
+        // failure of alice trying to open view
         expect(err).to.be.an.instanceOf(Error);
         expect(await contract.isOpen()).to.equal(false);
     });
