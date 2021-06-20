@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>📜 NFT Letter ✍️</title>
+</head>
+<style>
+  input {
+    display: block;
+    margin-bottom: 12px;
+  }
+</style>
+<body onload="about()" style="font-family:monospace;background-color:#EAEAEA;">
+  <center>
+    <h1 style="font-size:5vw">📜✍️</h1>
+    If you wish to create a new Letter, click <b>New Letter</b>.
+    <br>
+    If you wish to append a new Page to your existing Letter, click <b>New Page</b>.
+    <br>
+    <br>
+    <table class="tg">
+        <tbody>
+          <tr>
+            <td>
+              <form action="createLetter.html">
+                <input type="submit" value="New Letter"/>
+              </form>
+            </td>
+            <td>
+                <form action="mintPage.html">
+                  <input type="submit" value="New Page"/>
+                </form>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+    <table class="tg">
+    <tbody>
+      <tr>
+        <td>
+          <form action="index.html">
+            <input type="submit" value="Back"/>
+          </form>
+        </td>
+        <td>
+          <form action="display.html">
+            <input type="submit" value="Display"/>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </center>
+</body>
+</html>
