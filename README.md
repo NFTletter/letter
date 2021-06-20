@@ -60,7 +60,8 @@ Whenever the ownership for some `Page` is transferred from `addressA` to `addres
 - [x] `LetterFactory.sol`.
 - [x] Tests for `LetterFactory.sol`.
 - [x] Gas benchmarks.
-- [ ] Minter Front End.
+- [ ] Create Letter Front End.
+- [ ] Page Mint Front End.
 - [ ] Display Front End.
 - [ ] Testnet deployment + Feedback.
 - [ ] Automated Auditing.
