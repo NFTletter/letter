@@ -28,7 +28,7 @@ async function benchmarkCreateLetter() {
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log("benchmark createLetter() with fixed Title + Author");
     console.log("...................................................");
-    console.log("Page Length\tGas Used\tETH Cost @ 6.1 Gwei");
+    console.log("1st Page Len.\tGas Used\tETH Cost @ 6.1 Gwei");
     console.log("---------------------------------------------------");
 
     // iterate between 1 and 8192 characters
@@ -80,7 +80,7 @@ async function benchmarkPageMint() {
     letter = new ethers.Contract(letterAddress, letterABI, provider);
 
     // iterate between 1 and 8192 characters
-    for (let j = 0; j < 12; j++) {
+    for (let j = 0; j < 14; j++) {
 
         let pageLength = Math.pow(2, j);
         let page = genString(pageLength);
@@ -98,6 +98,7 @@ async function main() {
     [owner] = await hre.ethers.getSigners();
     LetterFactory = await hre.ethers.getContractFactory("LetterFactory");
     letterFactory = await LetterFactory.deploy(); await letterFactory.deployed();
+    provider = ethers.getDefaultProvider();
 
     await benchmarkCreateLetter();
     await benchmarkCreateLetterMax();
