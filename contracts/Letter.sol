@@ -32,16 +32,13 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     // Mapping from token ID to owner address
     mapping(uint256 => address) private _owners;
 
-    // Mapping owner address to token count
-    mapping(address => uint256) private _balances;
-
     // ---------------------------------------
     // Initializer
     function initLetter(string memory _titleMint, string memory _firstPageMint, string memory _authorMint, address _owner)
     public
     initializer {
 
-        __ERC721_init("Letter", "LETT");__ERC721_init("Letter", "LETT");
+        __ERC721_init("Letter", "LETT");
         __Ownable_init();
 
         // Page Title is optional, max 64 characters
