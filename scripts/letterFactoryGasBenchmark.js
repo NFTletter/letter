@@ -51,7 +51,7 @@ async function benchmarkCreateLetterMax() {
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log("benchmark createLetter() with maximum Title + Page + Author lenghts");
     console.log("....................................................................................");
-    console.log("Title Lenght\tPage Length\tAuthor Length\tGas Used\tETH Cost @ 6.1 Gwei");
+    console.log("1st Page Len.\tTitle Lenght\tAuthor Length\tGas Used\tETH Cost @ 6.1 Gwei");
     console.log("------------------------------------------------------------------------------------");
 
     // create Letter Contract Clone
@@ -60,7 +60,7 @@ async function benchmarkCreateLetterMax() {
 
     cost = 6.1 * gasUsed * 0.000000001;
 
-    console.log("64\t\t8192\t\t64\t\t" + gasUsed + "\t\t" + cost);
+    console.log("8192\t\t64\t\t64\t\t" + gasUsed + "\t\t" + cost);
 }
 
 async function benchmarkPageMint() {
