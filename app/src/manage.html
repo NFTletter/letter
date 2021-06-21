@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>📜 NFT Letter ✍️</title>
+</head>
+<style>
+  input {
+    display: block;
+    margin-bottom: 12px;
+  }
+</style>
+<body onload="about()" style="font-family:monospace;background-color:#EAEAEA;">
+  <center>
+    <h1 style="font-size:5vw">📜✍️</h1>
+    Set your Letter as <b>Open</b> or <b>Closed</b>. Only the Letter Contract Owner is allowed to do so.
+    <br>
+    In case your Letter is set as <b>Open</b>, any Address will be able to view its contents.
+    <br>
+    <br>
+    <label for="title">Letter Contract Address:</label>
+    <input type="text" id="viewer" size="50" placeholder="e.g.: 0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199"/>
+    <table class="tg">
+        <tbody>
+          <tr>
+            <td>
+              <button onclick="App.openView()">Open</button>
+            </td>
+            <td>
+              <button onclick="App.closeView()">Close</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <br>
+    In case your Letter is set as <b>Closed</b>, you can still explicitly add and remove Viewers.
+    <br>
+    <br>
+    <label for="title">Viewer Address:</label>
+    <input type="text" id="viewer" size="50" placeholder="e.g.: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8"/>
+    <table class="tg">
+        <tbody>
+          <tr>
+            <td>
+              <button onclick="App.addViewer()">Add Viewer</button>
+            </td>
+            <td>
+              <button onclick="App.removeViewer()">Remove Viewer</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="tg">
+    <tbody>
+      <tr>
+        <td>
+          <form action="index.html">
+            <input type="submit" value="Back"/>
+          </form>
+        </td>
+        <td>
+            <form action="create.html">
+              <input type="submit" value="Create"/>
+            </form>
+          </td>
+        <td>
+          <form action="display.html">
+            <input type="submit" value="Display"/>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </center>
+</body>
+</html>
