@@ -50,7 +50,8 @@ const App = {
     const addr = ethers.utils.getAddress(address);
 
     const createdLetter = document.getElementById("createdLetter");
-    createdLetter.innerHTML = "Letter Contract Address: " + addr;
+    createdLetter.innerHTML = "Letter Contract Address: <b>" + addr + "</b>";
+    createdLetter.innerHTML += "<br> Make sure you save it somewhere!";
 
     return;
   }
