@@ -9,7 +9,7 @@
     margin-bottom: 12px;
   }
 </style>
-<body onload="about()" style="font-family:monospace;background-color:#EAEAEA;">
+<body style="font-family:monospace;background-color:#EAEAEA;">
   <center>
     <h1 style="font-size:5vw">📜✍️</h1>
     Set your Letter as <b>Open</b> or <b>Closed</b>. Only the Letter Contract Owner is allowed to do so.
@@ -18,7 +18,7 @@
     <br>
     <br>
     <label for="title">Letter Contract Address:</label>
-    <input type="text" id="viewer" size="50" placeholder="e.g.: 0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199"/>
+    <input type="text" id="contractAddr" size="50" placeholder="e.g.: 0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199"/>
     <table class="tg">
         <tbody>
           <tr>
@@ -32,11 +32,14 @@
         </tbody>
     </table>
     <br>
+    <span id="openStatus"></span>
+    <br>
+    <br>
     In case your Letter is set as <b>Closed</b>, you can still explicitly add and remove Viewers.
     <br>
     <br>
     <label for="title">Viewer Address:</label>
-    <input type="text" id="viewer" size="50" placeholder="e.g.: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8"/>
+    <input type="text" id="viewerAddr" size="50" placeholder="e.g.: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8"/>
     <table class="tg">
         <tbody>
           <tr>
@@ -49,6 +52,9 @@
           </tr>
         </tbody>
     </table>
+    <br>
+    <span id="viewerStatus"></span>
+    <br>
     <br>
     <table class="tg">
     <tbody>
@@ -72,5 +78,6 @@
     </tbody>
     </table>
   </center>
+  <script src="manage.js"></script>
 </body>
 </html>
