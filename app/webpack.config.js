@@ -14,6 +14,7 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
   },
+  devtool: "eval-cheap-source-map",
   plugins: [
     new CopyWebpackPlugin([
       { from: "./src/index.html", to: "index.html" },
