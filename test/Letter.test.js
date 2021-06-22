@@ -1,6 +1,5 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const keccak256 = require('keccak256');
 
 const MAX_TITLE_LEN = 64;
 const MAX_PAGE_LEN = 8192;
@@ -165,7 +164,6 @@ describe("Letter Contract Page appending tests", function () {
 });
 
 describe("Letter Contract View tests", function () {
-    let VIEWER_ROLE = keccak256("VIEWER");
 
     beforeEach(async function () {
         [owner, alice, bob] = await ethers.getSigners()
@@ -197,19 +195,19 @@ describe("Letter Contract View tests", function () {
     
         // failure of alice trying to add bob as viewer
         expect(err).to.be.an.instanceOf(Error);
-        expect(await contract.hasRole(VIEWER_ROLE, bob.address)).to.equal(false);
+        expect(await contract.isViewer(bob.address)).to.equal(false);
     });
     
     it('owner can add viewer', async() => {
     
         // alice is not viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(false);
+        expect(await contract.isViewer(alice.address)).to.equal(false);
     
         // owner adds alice as viewer
         await contract.addViewer(alice.address);
     
         // alice is viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(true);
+        expect(await contract.isViewer(alice.address)).to.equal(true);
     });
 
     it('non-owner cannot open view', async() => {
@@ -276,7 +274,7 @@ describe("Letter Contract View tests", function () {
     it('non-viewer cannot view closed letter', async() => {
 
         // alice is not viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(false);
+        expect(await contract.isViewer(alice.address)).to.equal(false);
         
         // view is closed
         expect(await contract.isOpen()).to.equal(false);
@@ -297,7 +295,7 @@ describe("Letter Contract View tests", function () {
     it('non-viewer can view open letter', async() => {
     
         // alice is not viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(false);
+        expect(await contract.isViewer(alice.address)).to.equal(false);
     
         // view is open
         await contract.openView();
@@ -318,7 +316,7 @@ describe("Letter Contract View tests", function () {
     it('viewer can view closed letter', async() => {
     
         // alice is not viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(false);
+        expect(await contract.isViewer(alice.address)).to.equal(false);
     
         // owner adds alice as viewer
         await contract.addViewer(alice.address);
@@ -344,7 +342,7 @@ describe("Letter Contract View tests", function () {
         await contract.addViewer(alice.address);
 
         // alice is viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(true);
+        expect(await contract.isViewer(alice.address)).to.equal(true);
     
         // view is open
         await contract.openView();
@@ -368,13 +366,13 @@ describe("Letter Contract View tests", function () {
         await contract.addViewer(alice.address);
 
         // alice is viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(true);
+        expect(await contract.isViewer(alice.address)).to.equal(true);
     
         // owner revokes alice as viewer
         await contract.removeViewer(alice.address);
     
         // alice is not viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(false);
+        expect(await contract.isViewer(alice.address)).to.equal(false);
     });
     
     it('new page owner is viewer, prev page owner remains viewer (transferFrom)', async() => {
@@ -383,7 +381,7 @@ describe("Letter Contract View tests", function () {
         expect(await contract.ownerOf(0)).to.equal(owner.address);
     
         // alice is not viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(false);
+        expect(await contract.isViewer(alice.address)).to.equal(false);
     
         // transfer first page from owner to alice
         await contract.transferFrom(owner.address, alice.address, 0);
@@ -392,10 +390,10 @@ describe("Letter Contract View tests", function () {
         expect(await contract.ownerOf(0)).to.equal(alice.address);
     
         // alice is viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(true);
+        expect(await contract.isViewer(alice.address)).to.equal(true);
     
         // owner is still viewer
-        expect(await contract.hasRole(VIEWER_ROLE, owner.address)).to.equal(true);
+        expect(await contract.isViewer(alice.address)).to.equal(true);
     
     });
     
@@ -405,7 +403,7 @@ describe("Letter Contract View tests", function () {
         expect(await contract.ownerOf(0)).to.equal(owner.address);
     
         // alice is not viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(false);
+        expect(await contract.isViewer(alice.address)).to.equal(false);
     
         // safeTransfer first page from owner to alice
         await contract['safeTransferFrom(address,address,uint256,bytes)'](owner.address, alice.address, 0, 0);
@@ -414,10 +412,10 @@ describe("Letter Contract View tests", function () {
         expect(await contract.ownerOf(0)).to.equal(alice.address);
     
         // alice is viewer
-        expect(await contract.hasRole(VIEWER_ROLE, alice.address)).to.equal(true);
+        expect(await contract.isViewer(alice.address)).to.equal(true);
     
         // owner is still viewer
-        expect(await contract.hasRole(VIEWER_ROLE, owner.address)).to.equal(true);
+        expect(await contract.isViewer(owner.address)).to.equal(true);
     
     });
     

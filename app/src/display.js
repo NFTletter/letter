@@ -26,11 +26,11 @@ const App = {
             return;
         }
 
-        // ToDo: implement isViewer()
-        // if (await letter.connect(App.signer).isViewer() != await App.signer.getAddress()) {
-        //     window.alert("error: you must be the Letter Contract Owner");
-        //     return;
-        // }
+        let signerAddr = await App.signer.getAddress();
+        if (!(await letter.connect(App.signer).isViewer(signerAddr))) {
+            window.alert("error: you must have the Letter Viewer role");
+            return;
+        }
 
         let title;
         let page;

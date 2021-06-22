@@ -90,6 +90,17 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         _;
     }
 
+    /// @dev Check if account belongs to Viewer Role.
+    function isViewer(address _account)
+    public
+    view 
+    returns (bool){
+        if (_open){
+            return true;
+        }
+        return hasRole(VIEWER_ROLE, _account);
+    }
+
     /// @dev Add an account to the Viewer role. Restricted to Owner.
     function addViewer(address _account)
     public
