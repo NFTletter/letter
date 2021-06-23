@@ -2,7 +2,6 @@
   "name": "letter",
   "version": "1.0.0",
   "description": "Letter is an ERC-721 Smart Contract that allows for the creation of text-based NFTs, meant for written artistic expression.",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
