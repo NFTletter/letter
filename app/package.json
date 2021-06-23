@@ -19,7 +19,12 @@
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
     "ethers": "^5.3.1",
-    "web3": "^1.2.4"
+    "source-map-loader": "^1.0.0",
+    "copy-webpack-plugin": "^5.0.5",
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.11.2"
   },
   "main": "webpack.config.js",
   "repository": {
