@@ -239,7 +239,7 @@
 				"type": "address"
 			}
 		],
-		"name": "addViewer",
+		"name": "addReader",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -283,7 +283,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "closeView",
+		"name": "close",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -441,7 +441,7 @@
 				"type": "address"
 			}
 		],
-		"name": "isViewer",
+		"name": "isReader",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -450,19 +450,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_pageMint",
-				"type": "string"
-			}
-		],
-		"name": "mintPage",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -480,7 +467,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "openView",
+		"name": "open",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -518,6 +505,51 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "readAuthor",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_pageN",
+				"type": "uint256"
+			}
+		],
+		"name": "readPage",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "readTitle",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -525,7 +557,7 @@
 				"type": "address"
 			}
 		],
-		"name": "removeViewer",
+		"name": "removeReader",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -731,38 +763,6 @@
 	},
 	{
 		"inputs": [],
-		"name": "viewAuthor",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pageN",
-				"type": "uint256"
-			}
-		],
-		"name": "viewPage",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "viewPageCount",
 		"outputs": [
 			{
@@ -775,16 +775,16 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "viewTitle",
-		"outputs": [
+		"inputs": [
 			{
 				"internalType": "string",
-				"name": "",
+				"name": "_pageMint",
 				"type": "string"
 			}
 		],
-		"stateMutability": "view",
+		"name": "writePage",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

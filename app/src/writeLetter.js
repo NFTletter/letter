@@ -21,7 +21,7 @@ const App = {
     }
   },
 
-  createLetter: async function () {
+  writeLetter: async function () {
 
     // max 64 chars
     const title = document.getElementById("title").value;
@@ -49,9 +49,9 @@ const App = {
     const { address } = events.find(Boolean);
     const addr = ethers.utils.getAddress(address);
 
-    const createdLetter = document.getElementById("createdLetter");
-    createdLetter.innerHTML = "Letter Contract Address: <b>" + addr + "</b>";
-    createdLetter.innerHTML += "<br> Make sure you save it somewhere!";
+    const writtenLetter = document.getElementById("writtenLetter");
+    writtenLetter.innerHTML = "Letter Contract Address: <b>" + addr + "</b>";
+    writtenLetter.innerHTML += "<br> Make sure you save it somewhere!";
 
     return;
   }

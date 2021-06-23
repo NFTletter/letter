@@ -16,12 +16,12 @@
     <input type="text" id="contractAddr" size="50" placeholder="e.g.: 0x8626f6940e2eb28930efb4cef49b2d1f2c9c1199"/>
     <label for="title">Page Token Id:</label>
     <input type="text" id="pageTokenId" size="50" placeholder="e.g.: 1337"/>
-    <button onclick="App.displayPage()">Display Page</button>
+    <button onclick="App.readPage()">Read Page</button>
     <style type="text/css">
       .tg .tg-left{font-weight:bold;vertical-align:top;white-space:nowrap;}
       .tg .tg-right{text-align:justify;vertical-align:top;color:#333333}
     </style>
-    <span id="display" style="white-space: pre-wrap"></span>
+    <span id="read" style="white-space: pre-wrap"></span>
     <br><br>
     <table class="tg">
     <tbody>
@@ -37,14 +37,14 @@
           </form>
         </td>
         <td>
-          <form action="create.html">
-            <input type="submit" value="Create"/>
+          <form action="write.html">
+            <input type="submit" value="Write"/>
           </form>
         </td>
       </tr>
     </tbody>
     </table>
   </center>
-  <script src="display.js"></script>
+  <script src="read.js"></script>
 </body>
 </html>

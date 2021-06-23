@@ -10,7 +10,7 @@ const App = {
   start: async function () {
   },
 
-  openView: async function () {
+  open: async function () {
 
     const contractAddr = document.getElementById("contractAddr").value;
 
@@ -31,7 +31,7 @@ const App = {
       return;
     }
 
-    await letter.connect(App.signer).openView();
+    await letter.connect(App.signer).open();
 
     const openStatus = document.getElementById("openStatus");
     openStatus.innerHTML = "<b>Open Letter</b>";
@@ -39,7 +39,7 @@ const App = {
     return;
   },
 
-  closeView: async function () {
+  close: async function () {
 
     const contractAddr = document.getElementById("contractAddr").value;
 
@@ -60,7 +60,7 @@ const App = {
       return;
     }
 
-    await letter.connect(App.signer).closeView();
+    await letter.connect(App.signer).close();
 
     const openStatus = document.getElementById("openStatus");
     openStatus.innerHTML = "<b>Closed Letter</b>";
@@ -68,7 +68,7 @@ const App = {
     return;
   },
 
-  addViewer: async function () {
+  addReader: async function () {
 
     const contractAddr = document.getElementById("contractAddr").value;
 
@@ -77,10 +77,10 @@ const App = {
         return;
     }
 
-    const viewerAddr = document.getElementById("viewerAddr").value;
+    const readerAddr = document.getElementById("readerAddr").value;
 
-    if (!ethers.utils.isAddress(viewerAddr)) {
-        window.alert("error: invalid Viewer Address... Make sure there's no extra spaces on the input field");
+    if (!ethers.utils.isAddress(readerAddr)) {
+        window.alert("error: invalid Reader Address... Make sure there's no extra spaces on the input field");
         return;
     }
 
@@ -96,15 +96,15 @@ const App = {
       return;
     }
 
-    await letter.connect(App.signer).addViewer(viewerAddr);
+    await letter.connect(App.signer).addReader(readerAddr);
 
-    const viewerStatus = document.getElementById("viewerStatus");
-    viewerStatus.innerHTML = viewerAddr + "<b> is Viewer.</b>";
+    const readerStatus = document.getElementById("readerStatus");
+    readerStatus.innerHTML = readerAddr + "<b> is Reader.</b>";
 
     return;
   },
 
-  removeViewer: async function () {
+  removeReader: async function () {
 
     const contractAddr = document.getElementById("contractAddr").value;
 
@@ -113,10 +113,10 @@ const App = {
         return;
     }
 
-    const viewerAddr = document.getElementById("viewerAddr").value;
+    const readerAddr = document.getElementById("readerAddr").value;
 
-    if (!ethers.utils.isAddress(viewerAddr)) {
-        window.alert("error: invalid Viewer Address... Make sure there's no extra spaces on the input field");
+    if (!ethers.utils.isAddress(readerAddr)) {
+        window.alert("error: invalid Reader Address... Make sure there's no extra spaces on the input field");
         return;
     }
 
@@ -132,10 +132,10 @@ const App = {
       return;
     }
 
-    await letter.connect(App.signer).removeViewer(viewerAddr);
+    await letter.connect(App.signer).removeReader(readerAddr);
 
-    const viewerStatus = document.getElementById("viewerStatus");
-    viewerStatus.innerHTML = viewerAddr + "<b> is not Viewer.</b>";
+    const readerStatus = document.getElementById("readerStatus");
+    readerStatus.innerHTML = readerAddr + "<b> is not Reader.</b>";
 
     return;
   }

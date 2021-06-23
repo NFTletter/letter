@@ -10,7 +10,7 @@ const App = {
     start: async function () {
     },
 
-    displayPage: async function () {
+    readPage: async function () {
 
         const address = document.getElementById("contractAddr").value.toString();
 
@@ -27,8 +27,8 @@ const App = {
         }
 
         let signerAddr = await App.signer.getAddress();
-        if (!(await letter.connect(App.signer).isViewer(signerAddr))) {
-            window.alert("error: you must have the Letter Viewer role");
+        if (!(await letter.connect(App.signer).isReader(signerAddr))) {
+            window.alert("error: you must have the Reader role for this Letter");
             return;
         }
 
@@ -45,16 +45,16 @@ const App = {
         }
 
         try {
-            title = await letter.connect(App.signer).viewTitle();
-            page = await letter.connect(App.signer).viewPage(pageTokenId);
-            author = await letter.connect(App.signer).viewAuthor();
+            title = await letter.connect(App.signer).readTitle();
+            page = await letter.connect(App.signer).readPage(pageTokenId);
+            author = await letter.connect(App.signer).readAuthor();
             owner = await letter.connect(App.signer).owner();
         } catch (err) {
             window.alert("error: unable to View");
             return;
         }
 
-        const display = document.getElementById("display");
+        const read = document.getElementById("read");
         let pageHTML = "<br><br><table class=\"tg\" style=\"max-width:400px;\"><tbody>";
         if (title) { pageHTML += "<tr><td class=\"tg-left\">Title: </td><td class=\"tg-right\">" + title + "</td></tr>" };
         // ToDo: \n line break
@@ -62,7 +62,7 @@ const App = {
         if (author) { pageHTML += "<tr><td class=\"tg-left\">Author: </td><td class=\"tg-right\">" + author + "</td></tr>" };
         pageHTML += "<tr><td class=\"tg-left\">Owner: </td><td class=\"tg-right\">" + owner + "</td></tr>"
         pageHTML += "</tbody></table>"
-        display.innerHTML = pageHTML;
+        read.innerHTML = pageHTML;
         return;
     }
 

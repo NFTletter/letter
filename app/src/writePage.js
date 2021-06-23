@@ -11,7 +11,7 @@ const App = {
   start: async function () {
   },
 
-  mintPage: async function () {
+  writePage: async function () {
 
     const contractAddr = document.getElementById("contractAddr").value;
 
@@ -23,7 +23,7 @@ const App = {
     //  max 8192 chars
     const page = document.getElementById("pageBody").value;
     if (page.length == 0) {
-        window.alert("error: Cannot mint empty Page.");
+        window.alert("error: Cannot write empty Page.");
         return;
     }
     if (page.length > 8192) {
@@ -39,7 +39,7 @@ const App = {
     }
 
     letter = await Letter.deployed();
-    const tx = await letter.connect(App.signer).mintPage(page);
+    const tx = await letter.connect(App.signer).writePage(page);
     await tx.wait();
 
     const pageCount = await letter.connect(App.signer).viewPageCount();

@@ -38,11 +38,11 @@ describe("Letter Contract Initialization tests", function () {
     
         // expect first Page
         expect(pageCount.toNumber()).to.equal(1);
-        expect(await contract.viewPage(0)).to.equal("");
+        expect(await contract.readPage(0)).to.equal("");
         
         // expect title + author
-        expect(await contract.viewTitle()).to.equal("");
-        expect(await contract.viewAuthor()).to.equal("");
+        expect(await contract.readTitle()).to.equal("");
+        expect(await contract.readAuthor()).to.equal("");
     
         // expect is initally closed
         expect(await contract.isOpen()).to.equal(false);
@@ -89,22 +89,22 @@ describe("Letter Contract Initialization tests", function () {
     
         // expect first Page
         expect(pageCount.toNumber()).to.equal(1);
-        expect(await contract.viewPage(0)).to.equal(firstPage);
+        expect(await contract.readPage(0)).to.equal(firstPage);
     
         // expect owner
         expect(await contract.ownerOf(0)).to.equal(owner.address);
     
         // mint second Page
-        await contract.mintPage(secondPage);;
+        await contract.writePage(secondPage);;
         pageCount = await contract.viewPageCount();
     
         // expect second Page
         expect(pageCount.toNumber()).to.equal(2);
-        expect(await contract.viewPage(1)).to.equal(secondPage);
+        expect(await contract.readPage(1)).to.equal(secondPage);
         
         // expect title + author
-        expect(await contract.viewTitle()).to.equal(title);
-        expect(await contract.viewAuthor()).to.equal(author);
+        expect(await contract.readTitle()).to.equal(title);
+        expect(await contract.readAuthor()).to.equal(author);
     
         // expect is initally closed
         expect(await contract.isOpen()).to.equal(false);
@@ -131,7 +131,7 @@ describe("Letter Contract Page appending tests", function () {
 
     it('exceed appended page chars', async() => {
         try {
-            await contract.mintPage(genString(MAX_PAGE_LEN + 1), {from: owner.address});
+            await contract.writePage(genString(MAX_PAGE_LEN + 1), {from: owner.address});
         } catch (error) {
             err = error;
         }
@@ -143,7 +143,7 @@ describe("Letter Contract Page appending tests", function () {
     it('owner can append new pages', async() => {
         let page = "I can do this";
     
-        await contract.mintPage(page, {from: owner.address});
+        await contract.writePage(page, {from: owner.address});
     
         expect(await contract.viewPageCount()).to.equal(2);
     });
@@ -152,7 +152,7 @@ describe("Letter Contract Page appending tests", function () {
         let page = "I cannot do this";
     
         try {
-            await contract.mintPage(page, {from: alice.address});
+            await contract.writePage(page, {from: alice.address});
         } catch (error) {
             err = error;
         }
@@ -175,213 +175,213 @@ describe("Letter Contract View tests", function () {
         await contract.initLetter(title, firstPage, author, owner.address);
 
         // mint second Page
-        await contract.mintPage(secondPage);
+        await contract.writePage(secondPage);
     });
 
     afterEach(async function () {
         contract = null;
     });
     
-    it('non-owner cannot add viewer', async() => {
+    it('non-owner cannot add reader', async() => {
     
         // alice is not owner
         expect(await contract.owner()).to.not.equal(alice.address);
     
         try {
-            await contract.addViewer(bob.address, {from: alice.address});
+            await contract.addReader(bob.address, {from: alice.address});
         } catch (error) {
             err = error;
         }
     
-        // failure of alice trying to add bob as viewer
+        // failure of alice trying to add bob as reader
         expect(err).to.be.an.instanceOf(Error);
-        expect(await contract.isViewer(bob.address)).to.equal(false);
+        expect(await contract.isReader(bob.address)).to.equal(false);
     });
     
-    it('owner can add viewer', async() => {
+    it('owner can add reader', async() => {
     
-        // alice is not viewer
-        expect(await contract.isViewer(alice.address)).to.equal(false);
+        // alice is not reader
+        expect(await contract.isReader(alice.address)).to.equal(false);
     
-        // owner adds alice as viewer
-        await contract.addViewer(alice.address);
+        // owner adds alice as reader
+        await contract.addReader(alice.address);
     
-        // alice is viewer
-        expect(await contract.isViewer(alice.address)).to.equal(true);
+        // alice is reader
+        expect(await contract.isReader(alice.address)).to.equal(true);
     });
 
-    it('non-owner cannot open view', async() => {
+    it('non-owner cannot open', async() => {
     
         // alice is not owner
         expect(await contract.owner()).to.not.equal(alice.address);
     
         try {
-            await contract.openView({from: alice.address});
+            await contract.open({from: alice.address});
         } catch (error) {
             err = error;
         }
     
-        // failure of alice trying to open view
+        // failure of alice trying to open
         expect(err).to.be.an.instanceOf(Error);
         expect(await contract.isOpen()).to.equal(false);
     });
     
-    it('owner can open view', async() => {
+    it('owner can open', async() => {
     
         // owner is owner
         expect(await contract.owner()).to.equal(owner.address);
     
-        await contract.openView({from: owner.address});
+        await contract.open({from: owner.address});
     
-        // owner was able to open view
+        // owner was able to open
         expect(await contract.isOpen()).to.equal(true);
     });
     
-    it('non-owner cannot close view', async() => {
+    it('non-owner cannot close', async() => {
 
         // alice is not owner
         expect(await contract.owner()).to.not.equal(alice.address);
     
         // view is open
-        await contract.openView({from: owner.address});
+        await contract.open({from: owner.address});
         expect(await contract.isOpen()).to.equal(true);
     
         try {
-            await contract.closeView({from: alice});
+            await contract.close({from: alice});
         } catch (error) {
             err = error;
         }
     
-        // failure of alice trying to close view
+        // failure of alice trying to close
         expect(err).to.be.an.instanceOf(Error);
         expect(await contract.isOpen()).to.equal(true);
     });
     
-    it('owner can close view', async() => {
+    it('owner can close', async() => {
     
         // owner is owner
         expect(await contract.owner()).to.equal(owner.address);
 
-        // view is closed
+        // read is closed
         expect(await contract.isOpen()).to.equal(false);
     
-        await contract.closeView({from: owner.address});
+        await contract.close({from: owner.address});
     
-        // owner was able to close view
+        // owner was able to close
         expect(await contract.isOpen()).to.equal(false);
     });
     
-    it('non-viewer cannot view closed letter', async() => {
+    it('non-reader cannot read closed letter', async() => {
 
-        // alice is not viewer
-        expect(await contract.isViewer(alice.address)).to.equal(false);
+        // alice is not reader
+        expect(await contract.isReader(alice.address)).to.equal(false);
         
-        // view is closed
+        // read is closed
         expect(await contract.isOpen()).to.equal(false);
     
         try {
-            await contract.viewTitle({from: alice.address});
-            await contract.viewPage(0, {from: alice.address});
-            await contract.viewPage(1, {from: alice.address});
-            await contract.viewAuthor({from: alice.address});
+            await contract.readTitle({from: alice.address});
+            await contract.readPage(0, {from: alice.address});
+            await contract.readPage(1, {from: alice.address});
+            await contract.readAuthor({from: alice.address});
         } catch (error) {
             err = error;
         }
     
-        // failure of alice trying view closed letter
+        // failure of alice trying read closed letter
         expect(err).to.be.an.instanceOf(Error);
     });
     
-    it('non-viewer can view open letter', async() => {
+    it('non-reader can read open letter', async() => {
     
-        // alice is not viewer
-        expect(await contract.isViewer(alice.address)).to.equal(false);
+        // alice is not reader
+        expect(await contract.isReader(alice.address)).to.equal(false);
     
-        // view is open
-        await contract.openView();
+        // read is open
+        await contract.open();
         expect(await contract.isOpen()).to.equal(true);
     
-        let viewedTitle = await contract.connect(alice.address).viewTitle();
-        let viewedFirstPage = await contract.connect(alice.address).viewPage(0);
-        let viewedSecondPage = await contract.connect(alice.address).viewPage(1);
-        let viewedAuthor = await contract.connect(alice.address).viewAuthor();
+        let readTitle = await contract.connect(alice.address).readTitle();
+        let readFirstPage = await contract.connect(alice.address).readPage(0);
+        let readSecondPage = await contract.connect(alice.address).readPage(1);
+        let readAuthor = await contract.connect(alice.address).readAuthor();
     
-        // letter viewed correctly
-        expect(viewedTitle).to.equal(title);
-        expect(viewedFirstPage).to.equal(firstPage);
-        expect(viewedSecondPage).to.equal(secondPage);
-        expect(viewedAuthor).to.equal(author);    
+        // letter read correctly
+        expect(readTitle).to.equal(title);
+        expect(readFirstPage).to.equal(firstPage);
+        expect(readSecondPage).to.equal(secondPage);
+        expect(readAuthor).to.equal(author);    
     });
     
-    it('viewer can view closed letter', async() => {
+    it('reader can read closed letter', async() => {
     
-        // alice is not viewer
-        expect(await contract.isViewer(alice.address)).to.equal(false);
+        // alice is not reader
+        expect(await contract.isReader(alice.address)).to.equal(false);
     
-        // owner adds alice as viewer
-        await contract.addViewer(alice.address);
+        // owner adds alice as reader
+        await contract.addReader(alice.address);
     
-        // view is closed
+        // read is closed
         expect(await contract.isOpen()).to.equal(false);
     
-        let viewedTitle = await contract.connect(alice.address).viewTitle();
-        let viewedFirstPage = await contract.connect(alice.address).viewPage(0);
-        let viewedSecondPage = await contract.connect(alice.address).viewPage(1);
-        let viewedAuthor = await contract.connect(alice.address).viewAuthor();
+        let readTitle = await contract.connect(alice.address).readTitle();
+        let readFirstPage = await contract.connect(alice.address).readPage(0);
+        let readSecondPage = await contract.connect(alice.address).readPage(1);
+        let readAuthor = await contract.connect(alice.address).readAuthor();
     
-        // letter viewed correctly
-        expect(viewedTitle).to.equal(title);
-        expect(viewedFirstPage).to.equal(firstPage);
-        expect(viewedSecondPage).to.equal(secondPage);
-        expect(viewedAuthor).to.equal(author);
+        // letter read correctly
+        expect(readTitle).to.equal(title);
+        expect(readFirstPage).to.equal(firstPage);
+        expect(readSecondPage).to.equal(secondPage);
+        expect(readAuthor).to.equal(author);
     });
     
-    it('viewer can view open letter', async() => {
+    it('reader can read open letter', async() => {
 
-        // owner adds alice as viewer
-        await contract.addViewer(alice.address);
+        // owner adds alice as reader
+        await contract.addReader(alice.address);
 
-        // alice is viewer
-        expect(await contract.isViewer(alice.address)).to.equal(true);
+        // alice is reader
+        expect(await contract.isReader(alice.address)).to.equal(true);
     
-        // view is open
-        await contract.openView();
+        // read is open
+        await contract.open();
         expect(await contract.isOpen()).to.equal(true);
     
-        let viewedTitle = await contract.connect(alice.address).viewTitle();
-        let viewedFirstPage = await contract.connect(alice.address).viewPage(0);
-        let viewedSecondPage = await contract.connect(alice.address).viewPage(1);
-        let viewedAuthor = await contract.connect(alice.address).viewAuthor();
+        let readTitle = await contract.connect(alice.address).readTitle();
+        let readFirstPage = await contract.connect(alice.address).readPage(0);
+        let readSecondPage = await contract.connect(alice.address).readPage(1);
+        let readAuthor = await contract.connect(alice.address).readAuthor();
     
-        // letter viewed correctly
-        expect(viewedTitle).to.equal(title);
-        expect(viewedFirstPage).to.equal(firstPage);
-        expect(viewedSecondPage).to.equal(secondPage);
-        expect(viewedAuthor).to.equal(author);
+        // letter readed correctly
+        expect(readTitle).to.equal(title);
+        expect(readFirstPage).to.equal(firstPage);
+        expect(readSecondPage).to.equal(secondPage);
+        expect(readAuthor).to.equal(author);
     });
     
-    it('owner can remove viewer', async() => {
+    it('owner can remove reader', async() => {
 
-        // owner adds alice as viewer
-        await contract.addViewer(alice.address);
+        // owner adds alice as reader
+        await contract.addReader(alice.address);
 
-        // alice is viewer
-        expect(await contract.isViewer(alice.address)).to.equal(true);
+        // alice is reader
+        expect(await contract.isReader(alice.address)).to.equal(true);
     
-        // owner revokes alice as viewer
-        await contract.removeViewer(alice.address);
+        // owner revokes alice as reader
+        await contract.removeReader(alice.address);
     
-        // alice is not viewer
-        expect(await contract.isViewer(alice.address)).to.equal(false);
+        // alice is not reader
+        expect(await contract.isReader(alice.address)).to.equal(false);
     });
     
-    it('new page owner is viewer, prev page owner remains viewer (transferFrom)', async() => {
+    it('new page owner is reader, prev page owner remains reader (transferFrom)', async() => {
     
         // owner is page owner
         expect(await contract.ownerOf(0)).to.equal(owner.address);
     
-        // alice is not viewer
-        expect(await contract.isViewer(alice.address)).to.equal(false);
+        // alice is not reader
+        expect(await contract.isReader(alice.address)).to.equal(false);
     
         // transfer first page from owner to alice
         await contract.transferFrom(owner.address, alice.address, 0);
@@ -389,21 +389,21 @@ describe("Letter Contract View tests", function () {
         // alice is page owner
         expect(await contract.ownerOf(0)).to.equal(alice.address);
     
-        // alice is viewer
-        expect(await contract.isViewer(alice.address)).to.equal(true);
+        // alice is reader
+        expect(await contract.isReader(alice.address)).to.equal(true);
     
-        // owner is still viewer
-        expect(await contract.isViewer(alice.address)).to.equal(true);
+        // owner is still reader
+        expect(await contract.isReader(alice.address)).to.equal(true);
     
     });
     
-    it('new page owner is viewer, prev page owner remains viewer (safeTransferFrom)', async() => {
+    it('new page owner is reader, prev page owner remains reader (safeTransferFrom)', async() => {
     
         // owner is page owner
         expect(await contract.ownerOf(0)).to.equal(owner.address);
     
-        // alice is not viewer
-        expect(await contract.isViewer(alice.address)).to.equal(false);
+        // alice is not reader
+        expect(await contract.isReader(alice.address)).to.equal(false);
     
         // safeTransfer first page from owner to alice
         await contract['safeTransferFrom(address,address,uint256,bytes)'](owner.address, alice.address, 0, 0);
@@ -411,11 +411,11 @@ describe("Letter Contract View tests", function () {
         // alice is page owner
         expect(await contract.ownerOf(0)).to.equal(alice.address);
     
-        // alice is viewer
-        expect(await contract.isViewer(alice.address)).to.equal(true);
+        // alice is reader
+        expect(await contract.isReader(alice.address)).to.equal(true);
     
-        // owner is still viewer
-        expect(await contract.isViewer(owner.address)).to.equal(true);
+        // owner is still reader
+        expect(await contract.isReader(owner.address)).to.equal(true);
     
     });
     

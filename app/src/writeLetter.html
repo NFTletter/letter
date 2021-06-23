@@ -25,18 +25,18 @@
     <label for="author">Author Signature:</label>
     <input type="text" id="author" size="55" placeholder="e.g.: 𝓢𝓱𝓪𝓴𝓮𝓼𝓹𝓮𝓪𝓻𝓮" />
 
-    <button onclick="App.createLetter()">Create Letter</button>
+    <button onclick="App.writeLetter()">Write Letter</button>
     <br>
     <br>
 
-    <span id="createdLetter"></span>
+    <span id="writtenLetter"></span>
 
     <br><br>
     <table class="tg">
     <tbody>
       <tr>
         <td>
-          <form action="create.html">
+          <form action="write.html">
             <input type="submit" value="Back"/>
           </form>
         </td>
@@ -46,8 +46,8 @@
           </form>
         </td>
         <td>
-          <form action="display.html">
-            <input type="submit" value="Display"/>
+          <form action="read.html">
+            <input type="submit" value="Read"/>
           </form>
         </td>
       </tr>
@@ -56,6 +56,6 @@
   </center>
 
   <br>
-  <script src="createLetter.js"></script>
+  <script src="writeLetter.js"></script>
 </body>
 </html>

@@ -71,8 +71,8 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupRole(DEFAULT_ADMIN_ROLE, _owner);
 
-        // Owner is Viewer
-        grantRole(VIEWER_ROLE, _owner);
+        // Owner is Reader
+        grantRole(READER_ROLE, _owner);
 
         // set Letter Contract Owner
         transferOwnership(_owner);
@@ -81,52 +81,52 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
 
     // ---------------------------------------
     // Access Control
-    bytes32 private constant VIEWER_ROLE = keccak256("VIEWER");
+    bytes32 private constant READER_ROLE = keccak256("READER");
 
-    modifier onlyViewer() {
+    modifier onlyReader() {
         if (!_open){
-            require (hasRole(VIEWER_ROLE, msg.sender), "Restricted to Viewer Role");
+            require (hasRole(READER_ROLE, msg.sender), "Restricted to Reader Role");
         }
         _;
     }
 
-    /// @dev Check if account belongs to Viewer Role.
-    function isViewer(address _account)
+    /// @dev Check if account belongs to Reader Role.
+    function isReader(address _account)
     public
     view 
     returns (bool){
         if (_open){
             return true;
         }
-        return hasRole(VIEWER_ROLE, _account);
+        return hasRole(READER_ROLE, _account);
     }
 
-    /// @dev Add an account to the Viewer role. Restricted to Owner.
-    function addViewer(address _account)
+    /// @dev Add an account to the Reader role. Restricted to Owner.
+    function addReader(address _account)
     public
     virtual
     onlyOwner {
-        grantRole(VIEWER_ROLE, _account);
+        grantRole(READER_ROLE, _account);
     }
 
-    /// @dev Remove an account from the Viewer role. Restricted to Owner.
-    function removeViewer(address _account)
+    /// @dev Remove an account from the Reader role. Restricted to Owner.
+    function removeReader(address _account)
     public
     virtual
     onlyOwner {
-        revokeRole(VIEWER_ROLE, _account);
+        revokeRole(READER_ROLE, _account);
     }
 
-    /// @dev open Viewer Role (every account can View)
-    function openView()
+    /// @dev open Reader Role (every account can Read)
+    function open()
     public
     virtual
     onlyOwner {
         _open = true;
     }
 
-    /// @dev close Viewer Role (only Viewer accounts can View)
-    function closeView()
+    /// @dev close Reader Role (only Reader accounts can Read)
+    function close()
     public
     virtual
     onlyOwner {
@@ -136,31 +136,31 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     // ---------------------------------------
     // View functions
     
-    /// @dev view Title
-    function viewTitle()
+    /// @dev read Title
+    function readTitle()
     public
     view
-    onlyViewer
+    onlyReader
     returns (string memory) {
         return _title;
     }
 
-    // @dev view Author
-    function viewAuthor()
+    // @dev read Author
+    function readAuthor()
     public
     view
-    onlyViewer
+    onlyReader
     returns (string memory) { 
         return _author;
     }
 
-    // @dev view Page
-    function viewPage(uint256 _pageN)
+    // @dev read Page
+    function readPage(uint256 _pageN)
     public
     view
-    onlyViewer
+    onlyReader
     returns (string memory) {
-        require ((_pageN < _pages.length), "Can't view non-existent Page");
+        require ((_pageN < _pages.length), "Can't read non-existent Page");
         return _pages[_pageN];
     }
 
@@ -168,7 +168,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     function viewPageCount()
     public
     view
-    onlyViewer
+    onlyReader
     returns (uint256) {
         return _pages.length;
     }
@@ -196,8 +196,8 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     // ---------------------------------------
     // Mint new Page function
 
-    /// @dev mint new Page, append to Letter
-    function mintPage(string memory _pageMint)
+    /// @dev write new Page, append to Letter
+    function writePage(string memory _pageMint)
     public
     onlyOwner
     {
@@ -223,7 +223,7 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
             super.supportsInterface(interfaceId);
     }
 
-    /// @dev override so that Page owner belongs to Viewer role
+    /// @dev override so that Page owner belongs to Reader role
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data)
     public
     virtual
@@ -231,11 +231,11 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
         _safeTransfer(from, to, tokenId, _data);
 
-       // New Page owner belongs to Viewer role
-        _setupRole(VIEWER_ROLE, to);
+       // New Page owner belongs to Reader role
+        _setupRole(READER_ROLE, to);
     }
 
-    /// @dev override so that Page owner belongs to Viewer role
+    /// @dev override so that Page owner belongs to Reader role
     function transferFrom(address from, address to, uint256 tokenId)
     public
     virtual
@@ -245,8 +245,8 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
 
         _transfer(from, to, tokenId);
 
-        // New Page owner belongs to Viewer role
-        _setupRole(VIEWER_ROLE, to);
+        // New Page owner belongs to Reader role
+        _setupRole(READER_ROLE, to);
     }
 
 }

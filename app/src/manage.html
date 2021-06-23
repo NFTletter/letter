@@ -23,10 +23,10 @@
         <tbody>
           <tr>
             <td>
-              <button onclick="App.openView()">Open</button>
+              <button onclick="App.open()">Open</button>
             </td>
             <td>
-              <button onclick="App.closeView()">Close</button>
+              <button onclick="App.close()">Close</button>
             </td>
           </tr>
         </tbody>
@@ -35,19 +35,19 @@
     <span id="openStatus"></span>
     <br>
     <br>
-    In case your Letter is set as <b>Closed</b>, you can still explicitly add and remove Viewers.
+    In case your Letter is set as <b>Closed</b>, you can still explicitly add and remove Readers.
     <br>
     <br>
-    <label for="title">Viewer Address:</label>
-    <input type="text" id="viewerAddr" size="50" placeholder="e.g.: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8"/>
+    <label for="title">Reader Address:</label>
+    <input type="text" id="readerAddr" size="50" placeholder="e.g.: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8"/>
     <table class="tg">
         <tbody>
           <tr>
             <td>
-              <button onclick="App.addViewer()">Add Viewer</button>
+              <button onclick="App.addReader()">Add Reader</button>
             </td>
             <td>
-              <button onclick="App.removeViewer()">Remove Viewer</button>
+              <button onclick="App.removeReader()">Remove Reader</button>
             </td>
           </tr>
         </tbody>
@@ -65,13 +65,13 @@
           </form>
         </td>
         <td>
-            <form action="create.html">
-              <input type="submit" value="Create"/>
+            <form action="write.html">
+              <input type="submit" value="Write"/>
             </form>
           </td>
         <td>
-          <form action="display.html">
-            <input type="submit" value="Display"/>
+          <form action="read.html">
+            <input type="submit" value="Read"/>
           </form>
         </td>
       </tr>

@@ -11,7 +11,7 @@
   }
 </style>
 
-<body onload="about()" style="font-family:monospace;background-color:#EAEAEA;">
+<body style="font-family:monospace;background-color:#EAEAEA;">
   <center>
     <h1 style="font-size:5vw">📜✍️</h1>
     <label for="title">Letter Contract Address:</label>
@@ -20,7 +20,7 @@
     <br>
     <textarea id="pageBody" rows="4" cols="60" placeholder="e.g.: 𝔳𝔦𝔬𝔩𝔢𝔱𝔰 𝔞𝔯𝔢 𝔟𝔩𝔲𝔢"></textarea>
     <br><br>
-    <button onclick="App.mintPage()">Mint Page</button>
+    <button onclick="App.writePage()">Write Page</button>
     <br>
     <br>
 
@@ -31,7 +31,7 @@
     <tbody>
       <tr>
         <td>
-          <form action="create.html">
+          <form action="write.html">
             <input type="submit" value="Back"/>
           </form>
         </td>
@@ -41,8 +41,8 @@
           </form>
         </td>
         <td>
-          <form action="display.html">
-            <input type="submit" value="Display"/>
+          <form action="read.html">
+            <input type="submit" value="Read"/>
           </form>
         </td>
       </tr>
@@ -51,6 +51,6 @@
   </center>
 
   <br>
-  <script src="mintPage.js"></script>
+  <script src="writePage.js"></script>
 </body>
 </html>

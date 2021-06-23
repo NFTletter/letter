@@ -8,7 +8,7 @@ A `Letter` has the following attributes:
 - `string private _title`: max **64** characters, optionally empty.
 - `string private _author`: max **64** characters, optionally empty.
 - `string[] private _pages`, each array element represents a `Page`, with max **8192** characters per `Page`.
-- `bool private _open`: represents whether `Viewer` role is necessary to view `Letter` contents.
+- `bool private _open`: represents whether `Reader` role is necessary to view `Letter` contents.
 
 Each `Page` is a Non-Fungible Token (**NFT**) under the `Letter` *Contract Clone*.
 
@@ -17,25 +17,25 @@ Each `Page` is a Non-Fungible Token (**NFT**) under the `Letter` *Contract Clone
 Each `Letter` *Contract Clone* is `Ownable`.
 Only the contract's `Owner` is able to mint new NFTs by appending new `Page`s to the `Letter`.
 
-## Viewer Role (Access Control)
+## Reader Role (Access Control)
 
-The `Viewer` role allows for some `account` to visualize the Letter Page Tokens.
+The `Reader` role allows for some `account` to visualize the Letter Page Tokens.
 
-The `onlyViewer` modifier restricts access for the execution of the following functions:
+The `onlyReader` modifier restricts access for the execution of the following functions:
 - `viewTitle()`
 - `viewBody(pageN)`
 - `viewAuthor()`
 
 The `_open` attribute of the `Letter` *Contract Clone* overwrites the behavior of this role.
-If `isOpen() == true`, then `onlyViewer` has no effect, and every `account` is able to view `Letter` contents.
+If `isOpen() == true`, then `onlyReader` has no effect, and every `account` is able to view `Letter` contents.
 
 The `onlyOwner` modifier restricts access for the execution of the following functions:
-- `addViewer(account)`
-- `removeViewer(account)`
-- `openView()`
-- `closeView()`
+- `addReader(account)`
+- `removeReader(account)`
+- `open()`
+- `close()`
 
-Whenever the ownership for some `Page` is transferred from `addressA` to `addressB`, `addressB` automatically receives the `Viewer` role for the entire `Letter`. The `Viewer` role is kept forever on `addressB`, even if it ever transfers the ownership of such page to any other Address.
+Whenever the ownership for some `Page` is transferred from `addressA` to `addressB`, `addressB` automatically receives the `Reader` role for the entire `Letter`. The `Reader` role is kept forever on `addressB`, even if it ever transfers the ownership of such page to any other Address.
 
 ## Gas
 

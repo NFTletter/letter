@@ -5,10 +5,10 @@ module.exports = {
   mode: 'development',
   entry: {
     index: "./src/index.js",
-    createLetter: "./src/createLetter.js",
-    mintPage: "./src/mintPage.js",
+    writeLetter: "./src/writeLetter.js",
+    writePage: "./src/writePage.js",
     manage: "./src/manage.js",
-    display: "./src/display.js"
+    read: "./src/read.js"
   },
   output: {
     filename: "[name].js",
@@ -18,10 +18,10 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: "./src/index.html", to: "index.html" },
-      { from: "./src/create.html", to: "create.html"},
-      { from: "./src/createLetter.html", to: "createLetter.html"},
-      { from: "./src/mintPage.html", to: "mintPage.html" },
-      { from: "./src/display.html", to: "display.html" },
+      { from: "./src/write.html", to: "write.html"},
+      { from: "./src/writeLetter.html", to: "writeLetter.html"},
+      { from: "./src/writePage.html", to: "writePage.html" },
+      { from: "./src/read.html", to: "read.html" },
       { from: "./src/manage.html", to: "manage.html" },
     ]),
   ],
