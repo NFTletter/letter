@@ -1,6 +1,8 @@
 node_modules
+package-lock.json
 app/node_modules
 app/dist
+app/package-lock.json
 
 #Hardhat files
 cache
