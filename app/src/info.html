@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>📜 NFT Letter ✍️</title>
+</head>
+<style>
+    input {
+        display: block;
+        margin-bottom: 12px;
+        font-family: monospace;
+    }
+</style>
+
+<body style="font-family:monospace;background-color:#EAEAEA;">
+    <center>
+        <h1 style="font-size:5vw">📜✍️</h1>
+
+        <center>
+            Incubated on <a href="https://kernel.community/en/">KERNEL Block III</a>, <b>Letter</b> is an <a href="http://erc721.org/">ERC-721</a> Smart Contract that allows for the creation of <b>text-based NFTs</b>, meant for <b>written artistic expression</b>.
+            <br>
+            Letter allows for art pieces such as <b>poems</b>, <b>novels</b>, <b>manifestos</b> and <b>source code</b> to be minted as Non-Fungible Tokens into the <a href="https://ethereum.org/en/">Ethereum</a> blockchain.
+            <br>
+            <br>
+            Every time a new Letter is minted, a new <b><a href="https://docs.openzeppelin.com/contracts/4.x/api/proxy#Clones"><i>Contract Clone</i></a></b> is deployed, inheriting the logic from the reference <b><i>Implementation Contract</i></b>.
+            <br>
+            Within such <i>Contract Clone</i>, each Non-Fungible Token represents a <b>Page</b>, which consists of a string of <a href="https://home.unicode.org/"><b>Unicode</b></a> characters (max <b>8192</b>).
+            <br>
+            Each Letter has an optional <b>Title</b> and <b>Author Signature</b> fields, both also consisting of Unicode characters (max <b>64</b> each).
+            <br>
+            <br>
+            <b>All text is stored on-chain</b>.
+            <br>
+            The number of characters on each Letter's Title, Author and Page contents determine the Gas to be paid by the NFT minter. 
+            <br>
+            Therefore, larger Letters are more expensive to mint. This economic dynamic discourages vandalism and meaningless NFTs.
+      
+          </center>
+      
+          <center>
+            <br>
+            Letter is currently under an active matching round on <b>Gitcoin</b>: <a href="https://gitcoin.co/grants/2744/nft-letter">gitcoin.co/grants/2744/nft-letter</a>.
+            <br>
+            Development is taking place at <a href="https://github.com/NFTletter/letter">github.com/NFTletter/letter</a>.
+            <br>
+            Any questions, bugs or feedback, feel free to contact the mantainer:
+            <br>
+            <b>barodrigues@pm.me</b>
+          </center>
+      
+          <br>
+          <div style="horizontal-align:center;">
+             <center><img src="https://nftletter.github.io/BEAR.png" width="100" height="100"></center>
+             <br>
+          </div>
+
+        <form action="index.html">
+            <input type="submit" value="Back" />
+        </form>
+
+    </center>
+
+    <script src="info.js"></script>
+</body>
+
+</html>

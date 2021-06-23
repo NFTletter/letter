@@ -8,7 +8,8 @@ module.exports = {
     writeLetter: "./src/writeLetter.js",
     writePage: "./src/writePage.js",
     manage: "./src/manage.js",
-    read: "./src/read.js"
+    read: "./src/read.js",
+    info: "./src/info.js",
   },
   output: {
     filename: "[name].js",
@@ -23,6 +24,7 @@ module.exports = {
       { from: "./src/writePage.html", to: "writePage.html" },
       { from: "./src/read.html", to: "read.html" },
       { from: "./src/manage.html", to: "manage.html" },
+      { from: "./src/info.html", to: "info.html"},
     ]),
   ],
   devServer: { contentBase: path.join(__dirname, "dist"), compress: true },
