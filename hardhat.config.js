@@ -10,13 +10,19 @@ task("accounts", "Prints the list of accounts", async () => {
   }
 });
 
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
+const INFURA_API_KEY = "KEY";
+const RINKEBY_PRIVATE_KEY = "YOUR RINKEBY PRIVATE KEY"
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
   solidity: "0.8.0",
+  networks: {
+    rinkeby: {
+      url: `https://rinkeby.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [`0x${RINKEBY_PRIVATE_KEY}`]
+    }
+  }
 };
 
