@@ -1,5 +1,5 @@
 const { ethers } = require("ethers");
-import letterABI from "../../data/abi/LetterABI.json";
+import letterABI from "../data/abi/LetterABI.json";
 
 let letter;
 

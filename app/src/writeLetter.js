@@ -1,5 +1,5 @@
 const { ethers } = require("ethers");
-import letterFactoryABI from "../../data/abi/LetterFactoryABI.json";
+import letterFactoryABI from "../data/abi/LetterFactoryABI.json";
 
 // const letterFactoryAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // local Hardhat
 const letterFactoryAddress = "0x09291C6aC9E0b75FE68970C1Ad9883fD10b5180E"; // Rinkeby

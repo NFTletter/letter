@@ -1,6 +1,6 @@
 const { ethers } = require("ethers");
 const hre = require("hardhat");
-const letterABI = require("../test/LetterABI.json");
+const letterABI = require("../app/data/abi/LetterABI.json");
 
 let LetterFactory;
 let letterFactory;

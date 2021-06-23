@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const keccak256 = require('keccak256');
-const letterABI = require("../data/abi/LetterABI.json");
+const letterABI = require("../app/data/abi/LetterABI.json");
 
 describe("LetterFactory Clone Creation tests", function () {
 
