@@ -17,9 +17,9 @@ Please check [docs](./docs).
 - [x] `LetterFactory.sol`.
 - [x] Tests for `LetterFactory.sol`.
 - [x] Gas benchmarks.
-- [ ] Create Letter Front End.
-- [ ] Page Mint Front End.
-- [ ] Display Front End.
+- [x] Writing Letter Front End.
+- [x] Writing Page Front End.
+- [x] Reading Front End.
 - [ ] Testnet deployment + Feedback.
 - [ ] Automated Auditing.
 - [ ] Natspec documentation.
