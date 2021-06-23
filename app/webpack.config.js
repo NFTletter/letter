@@ -2,7 +2,6 @@ const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
   entry: {
     index: "./src/index.js",
     writeLetter: "./src/writeLetter.js",

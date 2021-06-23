@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server",
-    "start": "webpack-dev-server --hot"
+    "start": "./node_modules/webpack/bin/webpack.js --config webpack.config.js -p --progress && node server.js",
+    "heroku-postbuild": "webpack -p"
   },
   "devDependencies": {
     "source-map-loader": "^1.0.0",
@@ -18,10 +19,11 @@
   },
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
-    "ethers": "^5.3.1",
-    "source-map-loader": "^1.0.0",
     "copy-webpack-plugin": "^5.0.5",
+    "ethers": "^5.3.1",
+    "express": "^4.17.1",
     "html-webpack-plugin": "^5.3.1",
+    "source-map-loader": "^1.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.11.2"
