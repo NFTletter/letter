@@ -52,7 +52,6 @@ const App = {
     const { address } = events.find(Boolean);
     const addr = ethers.utils.getAddress(address);
 
-    
     writtenLetter.innerHTML = "Letter Contract Address: <b>" + addr + "</b>";
     writtenLetter.innerHTML += "<br> Make sure you save it somewhere!";
 

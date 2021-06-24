@@ -31,10 +31,18 @@ const App = {
       return;
     }
 
-    await letter.connect(App.signer).open();
-
     const openStatus = document.getElementById("openStatus");
-    openStatus.innerHTML = "<b>Open Letter</b>";
+
+    if (await letter.connect(App.signer).isOpen()) {
+      openStatus.innerHTML = "<b>Letter is already Open.</b>";
+      return;
+    }
+    openStatus.innerHTML = "Opening Letter... please wait for Transaction to be mined.";
+
+    const tx = await letter.connect(App.signer).open();
+    await tx.wait();
+
+    openStatus.innerHTML = "<b>Letter is Open.</b>";
 
     return;
   },
@@ -60,10 +68,18 @@ const App = {
       return;
     }
 
-    await letter.connect(App.signer).close();
-
     const openStatus = document.getElementById("openStatus");
-    openStatus.innerHTML = "<b>Closed Letter</b>";
+
+    if (!(await letter.connect(App.signer).isOpen())) {
+      openStatus.innerHTML = "<b>Letter is already Closed.</b>";
+      return;
+    }
+    openStatus.innerHTML = "Closing Letter... please wait for Transaction to be mined.";
+
+    const tx = await letter.connect(App.signer).close();
+    await tx.wait();
+    
+    openStatus.innerHTML = "<b>Closed Letter.</b>";
 
     return;
   },
@@ -96,10 +112,19 @@ const App = {
       return;
     }
 
-    await letter.connect(App.signer).addReader(readerAddr);
-
     const readerStatus = document.getElementById("readerStatus");
-    readerStatus.innerHTML = readerAddr + "<b> is Reader.</b>";
+    
+    if (await letter.connect(App.signer).isReader(readerAddr)){
+      readerStatus.innerHTML = "<b>" + readerAddr + " is already Reader.</b>";
+      return;
+    }
+
+    readerStatus.innerHTML = "Adding Reader... please wait for Transaction to be mined.";
+
+    const tx = await letter.connect(App.signer).addReader(readerAddr);
+    await tx.wait();
+
+    readerStatus.innerHTML = "<b>" + readerAddr + " is Reader.</b>";
 
     return;
   },
@@ -132,10 +157,19 @@ const App = {
       return;
     }
 
-    await letter.connect(App.signer).removeReader(readerAddr);
-
     const readerStatus = document.getElementById("readerStatus");
-    readerStatus.innerHTML = readerAddr + "<b> is not Reader.</b>";
+    
+    if (!(await letter.connect(App.signer).isReader(readerAddr))){
+      readerStatus.innerHTML = "<b>" + readerAddr + " is already not Reader.</b>";
+      return;
+    }
+
+    readerStatus.innerHTML = "Removing Reader... please wait for Transaction to be mined.";
+
+    const tx = await letter.connect(App.signer).removeReader(readerAddr);
+    await tx.wait();
+
+    readerStatus.innerHTML = "<b>" + readerAddr + "is not Reader.</b>";
 
     return;
   }

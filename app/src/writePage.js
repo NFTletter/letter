@@ -38,6 +38,9 @@ const App = {
         return;
     }
 
+    const status = document.getElementById("status");
+    status.innerHTML = "Writing Page... please wait for Transaction to be mined.";
+
     letter = await Letter.deployed();
     const tx = await letter.connect(App.signer).writePage(page);
     await tx.wait();
@@ -45,7 +48,6 @@ const App = {
     const pageCount = await letter.connect(App.signer).viewPageCount();
     const pageTokenId = pageCount - 1;
 
-    const status = document.getElementById("status");
     status.innerHTML = "Page Token Id: " + pageTokenId;
 
     return;

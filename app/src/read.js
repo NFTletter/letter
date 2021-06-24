@@ -44,6 +44,9 @@ const App = {
             return;
         }
 
+        const read = document.getElementById("read");
+        read.innerHTML = "<br><br>Reading Page... please wait."
+
         try {
             title = await letter.connect(App.signer).readTitle();
             page = await letter.connect(App.signer).readPage(pageTokenId);
@@ -54,8 +57,8 @@ const App = {
             return;
         }
 
-        const read = document.getElementById("read");
-        let pageHTML = "<br><br><table class=\"tg\" style=\"max-width:400px;\"><tbody>";
+        
+        let pageHTML = "<br><br><table class=\"tg\" style=\"max-width:400px;font-size: 20px\"><tbody>";
         if (title) { pageHTML += "<tr><td class=\"tg-left\">Title: </td><td class=\"tg-right\">" + title + "</td></tr>" };
         // ToDo: \n line break
         if (page) { pageHTML += "<tr><td class=\"tg-left\">Page: </td><td class=\"tg-right\">" + page + "</td></tr>" };
