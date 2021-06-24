@@ -21,7 +21,7 @@ async function main() {
 
   console.log("LetterFactory deployed to:", letterFactory.address);
 
-  const tx = await letterFactory.createLetter("𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡", "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡", "𝖇𝖊𝖆𝖗");
+  const tx = await letterFactory.createLetter("𝔥𝔢𝔩𝔩𝔬 𝔴𝔬𝔯𝔩𝔡", "𝔯𝔬𝔰𝔢𝔰 𝔞𝔯𝔢 𝔯𝔢𝔡 🌹", "𝖇𝖊𝖆𝖗");
   const { events } = await tx.wait();
   const { address } = events.find(Boolean);
 
