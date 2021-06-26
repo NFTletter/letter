@@ -24,7 +24,7 @@ function genString(n) {
     return new Array(n + 1).join('0');
 }
 
-async function benchmarkCreateLetter() {
+async function benchmarkWriteLetter() {
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log("benchmark createLetter() with fixed Title + Author");
     console.log("...................................................");
@@ -47,7 +47,7 @@ async function benchmarkCreateLetter() {
     }
 }
 
-async function benchmarkCreateLetterMax() {
+async function benchmarkWriteLetterMax() {
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log("benchmark createLetter() with maximum Title + Page + Author lenghts");
     console.log("....................................................................................");
@@ -63,9 +63,9 @@ async function benchmarkCreateLetterMax() {
     console.log("8192\t\t64\t\t64\t\t" + gasUsed + "\t\t" + cost);
 }
 
-async function benchmarkPageMint() {
+async function benchmarkWritePage() {
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    console.log("benchmark mintPage()");
+    console.log("benchmark writePage()");
     console.log("...................................................");
     console.log("Page Length\tGas Used\tETH Cost @ 6.1 Gwei");
     console.log("---------------------------------------------------");
@@ -85,7 +85,7 @@ async function benchmarkPageMint() {
         let pageLength = Math.pow(2, j);
         let page = genString(pageLength);
 
-        tx = await letter.connect(owner).mintPage(page);
+        tx = await letter.connect(owner).writePage(page);
         let { gasUsed } = await tx.wait();
 
         cost = 6.1 * gasUsed * 0.000000001;
@@ -97,12 +97,13 @@ async function benchmarkPageMint() {
 async function main() {
     [owner] = await hre.ethers.getSigners();
     LetterFactory = await hre.ethers.getContractFactory("LetterFactory");
-    letterFactory = await LetterFactory.deploy(); await letterFactory.deployed();
+    letterFactory = await LetterFactory.deploy();
+    await letterFactory.deployed();
     provider = ethers.getDefaultProvider();
 
-    await benchmarkCreateLetter();
-    await benchmarkCreateLetterMax();
-    await benchmarkPageMint();
+    await benchmarkWriteLetter();
+    await benchmarkWriteLetterMax();
+    await benchmarkWritePage();
 }
 
 main()
