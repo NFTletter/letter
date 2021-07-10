@@ -22,6 +22,6 @@ Please check [docs](./docs).
 - [x] Reading Front End.
 - [ ] Testnet deployment + Feedback.
 - [ ] Automated Auditing.
-- [ ] Natspec documentation.
+- [x] Natspec documentation.
 - [ ] [Prepare for Mainnet](https://docs.openzeppelin.com/learn/preparing-for-mainnet).
 - [ ] Mainnet deployment.

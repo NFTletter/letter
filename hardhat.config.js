@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
+require('hardhat-docgen');
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -23,6 +24,11 @@ module.exports = {
       url: `https://rinkeby.infura.io/v3/${INFURA_API_KEY}`,
       // accounts: [`0x${RINKEBY_PRIVATE_KEY}`]
     }
+  },
+  docgen: {
+    path: './docs/hardhat',
+    clear: true,
+    runOnCompile: true,
   }
 };
 

@@ -12,6 +12,10 @@ import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol"
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
+/// @title Letter Contract.
+/// @author Bernardo A. Rodrigues.
+/// @notice This contract defines a Letter, where each Page is a NFT.
+/// @dev This contract defines a Letter, where each Page is a NFT.
 contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeable {
 
     // Letter constants
@@ -33,7 +37,12 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     mapping(uint256 => address) private _owners;
 
     // ---------------------------------------
-    // Initializer
+    /// @notice Initializer of the Letter contract.
+    /// @dev Initializer of the Letter contract.
+    /// @param _titleMint Title of the Letter.
+    /// @param _firstPageMint Contents of the 1st Letter Page.
+    /// @param _authorMint Author Signature of the Letter (as in handwritten signature; NOT as in cryptographic signature).
+    /// @param _owner Owner of Letter contract.
     function initLetter(string memory _titleMint, string memory _firstPageMint, string memory _authorMint, address _owner)
     public
     initializer {
@@ -90,7 +99,10 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         _;
     }
 
-    /// @dev Check if account belongs to Reader Role.
+    /// @notice Check if Account belongs to Reader Role.
+    /// @dev Check if Account belongs to Reader Role.
+    /// @param _account Address of Account to be checked against Reader Role.
+    /// @return bool True if Account belongs to Reader Role, False otherwise.
     function isReader(address _account)
     public
     view 
@@ -101,7 +113,9 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         return hasRole(READER_ROLE, _account);
     }
 
+    /// @notice Add an account to the Reader role. Restricted to Owner.
     /// @dev Add an account to the Reader role. Restricted to Owner.
+    /// @param _account Address of Account to be added to Reader Role.
     function addReader(address _account)
     public
     virtual
@@ -109,7 +123,9 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         grantRole(READER_ROLE, _account);
     }
 
+    /// @notice Remove an account from the Reader role. Restricted to Owner.
     /// @dev Remove an account from the Reader role. Restricted to Owner.
+    /// @param _account Address of Account to be removed from Reader Role.
     function removeReader(address _account)
     public
     virtual
@@ -117,7 +133,8 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         revokeRole(READER_ROLE, _account);
     }
 
-    /// @dev open Reader Role (every account can Read)
+    /// @notice Open Reader Role (every Account can Read)
+    /// @dev Open Reader Role (every Account can Read)
     function open()
     public
     virtual
@@ -125,7 +142,9 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         _open = true;
     }
 
-    /// @dev close Reader Role (only Reader accounts can Read)
+    /// @notice 
+    /// @dev Close Reader Role (only Reader accounts can Read)
+    /// @dev Close Reader Role (only Reader accounts can Read)
     function close()
     public
     virtual
@@ -136,7 +155,9 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     // ---------------------------------------
     // View functions
     
-    /// @dev read Title
+    /// @notice Read Letter Title. Restricted to Accounts with Reader Role.
+    /// @dev Read Letter Title. Restricted to Accounts with Reader Role.
+    /// @return string Letter Title.
     function readTitle()
     public
     view
@@ -145,7 +166,9 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         return _title;
     }
 
-    // @dev read Author
+    /// @notice Read Letter Author. Restricted to Accounts with Reader Role.
+    /// @dev Read Letter Author. Restricted to Accounts with Reader Role.
+    /// @return string Letter Author.
     function readAuthor()
     public
     view
@@ -154,7 +177,10 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         return _author;
     }
 
-    // @dev read Page
+    /// @notice Reade Page. Restricted to Accounts with Reader Role.
+    /// @dev Reade Page. Restricted to Accounts with Reader Role.
+    /// @param _pageN Number (Token Id) of Page (NFT) to be read.
+    /// @return string Page Contents.
     function readPage(uint256 _pageN)
     public
     view
@@ -164,7 +190,9 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         return _pages[_pageN];
     }
 
-    // @dev view Page Count
+    /// @notice View Page Count. Restricted to Accounts with Reader Role.
+    /// @dev View Page Count. Restricted to Accounts with Reader Role.
+    /// @return uint256 Letter Page Count.
     function viewPageCount()
     public
     view
@@ -173,7 +201,9 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         return _pages.length;
     }
 
-    // @dev is open?
+    /// @notice Check whether Letter is Open.
+    /// @dev Check whether Letter is Open.
+    /// @return bool True if Letter is Open, False if Letter is Closed.
     function isOpen()
     public
     view
@@ -184,7 +214,10 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     // ---------------------------------------
     // Utility functions
 
-    /// @dev count string length
+    /// @notice Utility for calculating String Length.
+    /// @dev Utility for calculating String Length.
+    /// @param _s String for Length to be checked.
+    /// @return uint Length of String.
     function getStringLength(string memory _s) 
     private
     pure
@@ -196,7 +229,9 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
     // ---------------------------------------
     // Mint new Page function
 
-    /// @dev write new Page, append to Letter
+    /// @notice Write new Page (NFT) and append it to Letter. Restricted to Owner.
+    /// @dev Write new Page (NFT) and append it to Letter. Restricted to Owner.
+    /// @param _pageMint String with Page contents.
     function writePage(string memory _pageMint)
     public
     onlyOwner
@@ -214,7 +249,8 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
 
     }
 
-    /// @dev override
+    /// @notice Override, imposed by Interfaces from AccessControlUpgradeable and ERC721Upgradeable.
+    /// @dev Override, imposed by Interfaces from AccessControlUpgradeable and ERC721Upgradeable.
     function supportsInterface(bytes4 interfaceId) public view virtual override(AccessControlUpgradeable, ERC721Upgradeable) returns (bool) {
         return
             interfaceId == type(IAccessControlUpgradeable).interfaceId ||
@@ -223,7 +259,12 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
             super.supportsInterface(interfaceId);
     }
 
-    /// @dev override so that Page owner belongs to Reader role
+    /// @notice Override, guarantees that after Page NFT is transferred, new Owner belongs to Reader role.
+    /// @dev Override, guarantees that after Page NFT is transferred, new Owner belongs to Reader role.
+    /// @param from Address of previous Owner.
+    /// @param to Address of new Owner.
+    /// @param tokenId Page Number (NF Token Id).
+    /// @param _data Data.
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data)
     public
     virtual
@@ -235,7 +276,11 @@ contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeab
         _setupRole(READER_ROLE, to);
     }
 
-    /// @dev override so that Page owner belongs to Reader role
+    /// @notice Override, guarantees that after Page NFT is transferred, new Owner belongs to Reader role.
+    /// @dev Override, guarantees that after Page NFT is transferred, new Owner belongs to Reader role.
+    /// @param from Address of previous Owner.
+    /// @param to Address of new Owner.
+    /// @param tokenId Page Number (NF Token Id).
     function transferFrom(address from, address to, uint256 tokenId)
     public
     virtual
