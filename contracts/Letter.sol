@@ -18,6 +18,11 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 /// @dev This contract defines a Letter, where each Page is a NFT.
 contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeable {
 
+/// No high severity issues found
+/// Reviewed line-by-line and no vulnerabilities detected
+/// Therefore, smart contract is recommended to be deployed to mainnet
+/// 3rd Party Audited by @dev Francis Isberto
+
     // Letter constants
     uint private constant MAX_TITLE_LEN = 64;
     uint private constant MAX_PAGE_LEN = 8192;
