@@ -20,8 +20,8 @@ Please check [docs](./docs).
 - [x] Writing Letter Front End.
 - [x] Writing Page Front End.
 - [x] Reading Front End.
-- [ ] Testnet deployment + Feedback.
-- [ ] Automated Auditing.
+- [x] Testnet deployment + Feedback.
+- [x] 3rd Party Auditing.
 - [x] Natspec documentation.
 - [ ] [Prepare for Mainnet](https://docs.openzeppelin.com/learn/preparing-for-mainnet).
 - [ ] Mainnet deployment.
