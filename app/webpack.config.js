@@ -26,8 +26,5 @@ module.exports = {
       { from: "./src/info.html", to: "info.html"},
     ]),
   ],
-  devServer: { contentBase: path.join(__dirname, "dist"), compress: true },
-  node: {
-   fs: "empty"
-  }
+  devServer: { contentBase: path.join(__dirname, "dist"), compress: true }
 };
