@@ -77,10 +77,13 @@ window.addEventListener("load", async function () {
     App.letterFactoryAddress = "0x09291C6aC9E0b75FE68970C1Ad9883fD10b5180E";
   } else if (App.network.chainId == 31337) { // local Hardhat
     App.letterFactoryAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+  } else if (App.network.chainId == 1287){ // moonbeam alpha
+    App.letterFactoryAddress = "0xEAAfEd7caE3e329edd7A8b0a980b70E53c5784a9";
   } else {
     window.alert("error: no LetterFactory contract deployed in this network");
     return;
   }
+
 
   // load MetaMask account
   App.signer = App.provider.getSigner();
