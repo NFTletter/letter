@@ -12,16 +12,16 @@ import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol"
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
+/// No high severity issues found
+/// Reviewed line-by-line and no vulnerabilities detected
+/// Therefore, smart contract is recommended to be deployed to mainnet
+/// 3rd Party Audited by @dev Francis Isberto
+
 /// @title Letter Contract.
 /// @author Bernardo A. Rodrigues.
 /// @notice This contract defines a Letter, where each Page is a NFT.
 /// @dev This contract defines a Letter, where each Page is a NFT.
 contract Letter is ERC721Upgradeable, OwnableUpgradeable, AccessControlUpgradeable {
-
-/// No high severity issues found
-/// Reviewed line-by-line and no vulnerabilities detected
-/// Therefore, smart contract is recommended to be deployed to mainnet
-/// 3rd Party Audited by @dev Francis Isberto
 
     // Letter constants
     uint private constant MAX_TITLE_LEN = 64;
