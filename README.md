@@ -13,6 +13,7 @@ Please check [docs](./docs).
 ## Roadmap
 
 - [x] `Letter.sol`.
+- [ ] Markdown Support.
 - [x] Tests for `Letter.sol`.
 - [x] `LetterFactory.sol`.
 - [x] Tests for `LetterFactory.sol`.
